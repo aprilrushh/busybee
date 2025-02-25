@@ -58,7 +58,7 @@ const App = () => {
                 <div className="text-6xl">🐝</div>
               </div>
               <h1 className="font-poppins text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                BusyBee <span className="font-normal">ARMS</span>
+                Busy Bee <span className="font-normal">Agent</span>
               </h1>
               <div className="w-24 h-1 bg-yellow-400 mb-8"></div>
               <p className="text-xl md:text-2xl mb-8 font-light">AI Reservation Management System</p>
@@ -69,7 +69,7 @@ const App = () => {
                 "상담원이 정말 사람인지 구별할 수 없을 정도로 완벽합니다"
               </p>
               <p className="text-lg mb-12 max-w-2xl font-light italic">
-                예약, 상담, 관리를 BusyBee 로봇에 맡겨주세요
+                예약, 상담, 관리를 Busy Bee 로봇에 맡겨주세요
               </p>
               <button className="bg-white text-red-600 px-12 py-4 rounded-lg font-semibold hover:bg-red-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
                 무료로 시작하기
@@ -94,7 +94,7 @@ const App = () => {
       {/* Features Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">BusyBee의 특별한 점</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Busy Bee의 특별한 점</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             <FeatureCard
               icon="🤖"
