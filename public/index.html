@@ -1,27 +1,1616 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BusyBee</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Noto Sans KR', sans-serif;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BusyBee - 혁신적인 AI 콜센터 솔루션</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      overflow-x: hidden;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    }
+    .section-gradient {
+      background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .feature-card {
+      transition: all 0.3s ease;
+    }
+    .testimonial-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .top-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #FFA500;
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    .top-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+    .nav-link {
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #FFA500;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+    }
+    .btn-secondary {
+      border: 2px solid #FFA500;
+      color: #FFA500;
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background-color: #FFA500;
+      color: white;
+    }
+    .api-box {
+      transition: all 0.3s ease;
+    }
+    .api-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .animate-pulse-slow {
+      animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
       }
-      .font-poppins {
-        font-family: 'Poppins', sans-serif;
+      50% {
+        opacity: 0.5;
       }
-      .bg-pattern {
-        background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
+    }
+    .shadow-hover:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .case-study-card:hover .case-study-overlay {
+      opacity: 0.9;
+    }
+    .buzz-animation {
+      animation: buzz 0.3s infinite alternate;
+    }
+    @keyframes buzz {
+      0% {
+        transform: translateX(-1px) rotate(-1deg);
       }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+      100% {
+        transform: translateX(1px) rotate(1deg);
+      }
+    }
+    .hover-buzz:hover .bee-icon {
+      animation: buzz 0.3s infinite alternate;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+  <!-- 네비게이션 -->
+  <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold flex items-center">
+        <svg class="w-10 h-10 mr-2" viewBox="0 0 200 60">
+          <!-- 벌 몸체 -->
+          <ellipse cx="40" cy="30" rx="22" ry="18" fill="#FFC107" />
+          
+          <!-- 벌 줄무늬 -->
+          <rect x="31" y="21" width="18" height="5" rx="2.5" fill="#222" />
+          <rect x="31" y="30" width="18" height="5" rx="2.5" fill="#222" />
+          <rect x="31" y="39" width="18" height="3" rx="1.5" fill="#222" />
+          
+          <!-- 벌의 날개 -->
+          <ellipse cx="28" cy="22" rx="12" ry="10" fill="rgba(255, 255, 255, 0.7)" transform="rotate(-20, 28, 22)" />
+          <ellipse cx="28" cy="38" rx="12" ry="10" fill="rgba(255, 255, 255, 0.7)" transform="rotate(20, 28, 38)" />
+          
+          <!-- 벌 머리 -->
+          <circle cx="58" cy="30" r="10" fill="#FFC107" />
+          <circle cx="61" cy="27" r="2" fill="#222" /> <!-- 눈 -->
+          <circle cx="61" cy="33" r="2" fill="#222" /> <!-- 눈 -->
+          
+          <!-- 더듬이 -->
+          <path d="M63 24 Q68 15 73 20" stroke="#222" stroke-width="1.5" fill="none" />
+          <path d="M63 36 Q68 45 73 40" stroke="#222" stroke-width="1.5" fill="none" />
+        </svg>
+        <span class="text-gray-800">Busy<span class="text-yellow-500">Bee</span></span>
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a href="#about" class="nav-link hover:text-yellow-500 transition-colors">소개</a>
+        <a href="#features" class="nav-link hover:text-yellow-500 transition-colors">특징</a>
+        <a href="#benefits" class="nav-link hover:text-yellow-500 transition-colors">혜택</a>
+        <a href="#demo" class="nav-link hover:text-yellow-500 transition-colors">체험하기</a>
+        <a href="#cases" class="nav-link hover:text-yellow-500 transition-colors">적용사례</a>
+        <a href="#api" class="nav-link hover:text-yellow-500 transition-colors">API</a>
+        <a href="#contact" class="nav-link hover:text-yellow-500 transition-colors">연락처</a>
+      </div>
+      <button class="btn-primary text-white px-6 py-2 rounded-full transition shadow-md">무료 체험 신청</button>
+      <!-- 모바일 메뉴 버튼 -->
+      <div class="md:hidden">
+        <button class="text-gray-600 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero-gradient py-28 relative overflow-hidden">
+    <div class="absolute top-0 right-0 opacity-10">
+      <svg width="500" height="500" viewBox="0 0 200 200">
+        <path fill="#FFFFFF" d="M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45
+          c22.2-13.1,51.1-9.5,69.6,8.8c18.4,18.3,24.6,44.6,18.7,68.4c-5.9,23.8-23.1,30.2-50.6,44.1c-27.4,14-40.4,13.9-57.3,7.2
+          C66.3,166.5,49.7,196.5,37.5,186z"/>
+      </svg>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center">
+      <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
+          콜센터의 미래가<br/>지금 여기에 있습니다
+        </h1>
+        <p class="text-xl text-white mb-10 max-w-2xl mx-auto lg:mx-0">
+          BusyBee는 혁신적인 AI 기술로 콜센터 운영 방식을 완전히 변화시킵니다. 
+          인간과 구분할 수 없는 자연스러운 대화로 고객 응대를 자동화하세요.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6">
+          <button class="bg-white text-yellow-500 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition transform hover:-translate-y-1">
+            서비스 소개 받기
+          </button>
+          <button class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-yellow-500 px-8 py-3 rounded-full font-semibold text-lg transition transform hover:-translate-y-1">
+            지금 바로 체험하기
+          </button>
+        </div>
+      </div>
+      <div class="lg:w-1/2 relative">
+        <svg class="w-full max-w-lg mx-auto" viewBox="0 0 800 400">
+          <!-- AI 음성 웨이브 애니메이션 효과 -->
+          <g transform="translate(350, 180)">
+            <circle cx="0" cy="0" r="120" fill="#FFF" opacity="0.2" />
+            
+            <!-- 음파 원들 -->
+            <circle cx="0" cy="0" r="70" fill="none" stroke="#FFF" stroke-width="2" stroke-dasharray="5,5" class="animate-pulse-slow" />
+            <circle cx="0" cy="0" r="90" fill="none" stroke="#FFF" stroke-width="2" stroke-dasharray="8,8" class="animate-pulse-slow" />
+            <circle cx="0" cy="0" r="110" fill="none" stroke="#FFF" stroke-width="2" stroke-dasharray="12,12" class="animate-pulse-slow" />
+            
+            <!-- 음파 막대들 -->
+            <g transform="translate(-60, 0)" fill="#FFA500">
+              <rect x="0" y="-30" width="4" height="60" rx="2" />
+              <rect x="10" y="-50" width="4" height="100" rx="2" />
+              <rect x="20" y="-20" width="4" height="40" rx="2" />
+              <rect x="30" y="-40" width="4" height="80" rx="2" />
+              <rect x="40" y="-15" width="4" height="30" rx="2" />
+              <rect x="50" y="-25" width="4" height="50" rx="2" />
+              <rect x="60" y="-45" width="4" height="90" rx="2" />
+              <rect x="70" y="-30" width="4" height="60" rx="2" />
+              <rect x="80" y="-20" width="4" height="40" rx="2" />
+              <rect x="90" y="-35" width="4" height="70" rx="2" />
+              <rect x="100" y="-25" width="4" height="50" rx="2" />
+              <rect x="110" y="-40" width="4" height="80" rx="2" />
+            </g>
+          </g>
+          
+          <!-- 전화기 도형 -->
+          <g transform="translate(150, 80) scale(0.9)">
+            <!-- 전화 본체 -->
+            <rect x="20" y="30" width="200" height="350" rx="20" fill="#333" />
+            <rect x="30" y="50" width="180" height="290" rx="5" fill="#f5f5f5" />
+            
+            <!-- 전화 화면 -->
+            <rect x="45" y="70" width="150" height="210" rx="5" fill="#fff" stroke="#ddd" />
+            
+            <!-- 실제 통화 화면 내용 -->
+            <text x="120" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">
+              BusyBee 상담
+            </text>
+            <rect x="55" y="105" width="130" height="1" fill="#eee" />
+            
+            <!-- 채팅 버블 - 고객 -->
+            <rect x="55" y="115" width="90" height="30" rx="15" fill="#e3f2fd" />
+            <text x="75" y="135" font-family="Arial, sans-serif" font-size="10" fill="#555">
+              안녕하세요!
+            </text>
+            
+            <!-- 채팅 버블 - AI -->
+            <rect x="85" y="155" width="110" height="45" rx="15" fill="#fff4e5" />
+            <text x="100" y="175" font-family="Arial, sans-serif" font-size="10" fill="#555">
+              안녕하세요! BusyBee
+            </text>
+            <text x="100" y="190" font-family="Arial, sans-serif" font-size="10" fill="#555">
+              무엇을 도와드릴까요?
+            </text>
+            
+            <!-- 채팅 버블 - 고객 -->
+            <rect x="55" y="210" width="90" height="30" rx="15" fill="#e3f2fd" />
+            <text x="75" y="230" font-family="Arial, sans-serif" font-size="10" fill="#555">
+              예약하고 싶어요
+            </text>
+            
+            <!-- 전화 버튼 -->
+            <circle cx="120" cy="320" r="25" fill="#f5f5f5" stroke="#ddd" stroke-width="1" />
+            <circle cx="120" cy="320" r="22" fill="#4CAF50" />
+            <path d="M110,318 C112,316 114,315 116,316 Q118,317 120,319 Q124,323 128,321 C130,320 132,318 132,315 Q132,312 130,310 C126,306 120,305 115,307 Q107,310 105,317 Q103,324 108,328 Q112,332 117,332" 
+                  fill="none" stroke="#fff" stroke-width="2" />
+          </g>
+          
+          <!-- 전화를 받는 AI 비서 캐릭터 -->
+          <g transform="translate(580, 150)" class="bee-icon">
+            <!-- 벌 캐릭터 - 더 크고 상세하게 -->
+            <ellipse cx="0" cy="0" rx="50" ry="40" fill="#FFC107" />
+            
+            <!-- 벌 줄무늬 -->
+            <rect x="-20" y="-15" width="40" height="8" rx="4" fill="#222" />
+            <rect x="-20" y="0" width="40" height="8" rx="4" fill="#222" />
+            <rect x="-20" y="15" width="40" height="6" rx="3" fill="#222" />
+            
+            <!-- 벌의 날개 -->
+            <ellipse cx="-40" cy="-20" rx="30" ry="25" fill="rgba(255, 255, 255, 0.7)" transform="rotate(-20, -40, -20)" />
+            <ellipse cx="-40" cy="20" rx="30" ry="25" fill="rgba(255, 255, 255, 0.7)" transform="rotate(20, -40, 20)" />
+            
+            <!-- 벌 머리 -->
+            <circle cx="45" cy="0" r="25" fill="#FFC107" />
+            <circle cx="55" cy="-8" r="5" fill="#222" /> <!-- 눈 -->
+            <circle cx="55" cy="8" r="5" fill="#222" /> <!-- 눈 -->
+            
+            <!-- 더듬이 -->
+            <path d="M60 -15 Q75 -30 85 -20" stroke="#222" stroke-width="2.5" fill="none" />
+            <path d="M60 15 Q75 30 85 20" stroke="#222" stroke-width="2.5" fill="none" />
+            
+            <!-- 헤드셋 -->
+            <path d="M35 -30 C60 -40 70 -10 70 0 C70 10 60 40 35 30" stroke="#444" stroke-width="3" fill="none" />
+            <ellipse cx="35" cy="-25" rx="10" ry="15" fill="#333" />
+            <ellipse cx="35" cy="25" rx="10" ry="15" fill="#333" />
+            
+            <!-- 말풍선 -->
+            <g transform="translate(100, -60)">
+              <path d="M0,0 L-20,30 L15,30 Q40,30 40,15 Q40,0 25,0 Z" fill="#fff" stroke="#FFB74D" stroke-width="2" />
+              <text x="10" y="18" font-family="Arial, sans-serif" font-size="10" fill="#333">안녕하세요!</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 opacity-10">
+      <svg width="500" height="500" viewBox="0 0 200 200">
+        <path fill="#FFFFFF" d="M46.3,21.7c13.1-7.9,33.1-1.8,46,7.7c13.4,9.8,11.1,19.3,22.6,44.3c11.4,25.2,25.4,25.8,29.9,48.3
+          c5.1,25.1-8.9,51.1-30.7,61.7c-21.4,10.6-46.5,6.2-66.2-7.8c-19.8-14-15.4-31.9-15.8-62.3c-0.4-30.5-6.1-41.5-3.1-58.5
+          C31.9,37.8,33.2,29.6,46.3,21.7z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 소개 섹션 -->
+  <section id="about" class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <div class="relative">
+            <div class="absolute inset-0 bg-yellow-100 rounded-full transform -translate-x-6 translate-y-6"></div>
+            <img src="/api/placeholder/600/400" alt="BusyBee 솔루션" class="relative z-10 rounded-lg shadow-xl">
+            <div class="absolute -right-4 -bottom-4 bg-yellow-500 rounded-full p-6 shadow-lg transform hover:scale-110 transition-transform">
+              <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="md:w-1/2 md:pl-12">
+          <h2 class="text-3xl font-bold mb-6">BusyBee란?</h2>
+          <p class="text-lg mb-6 text-gray-600 leading-relaxed">
+            BusyBee는 전통적인 콜센터 운영 방식을 완전히 혁신하는 최첨단 AI 기반 음성 에이전트 시스템입니다. 
+            사람 상담원 대신 전화를 받고 고객 문의에 실시간으로 응대하는 완벽한 솔루션을 제공합니다.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span class="ml-4">24/7/365 무중단 서비스</span>
+            </div>
+            <div class="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span class="ml-4">실시간 자연스러운 대화</span>
+            </div>
+            <div class="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span class="ml-4">다국어 지원</span>
+            </div>
+            <div class="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span class="ml-4">즉각적인 응답</span>
+            </div>
+            <div class="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                </svg>
+              </div>
+              <span class="ml-4">무제한 동시 통화 처리</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기술 섹션 -->
+  <section id="features" class="section-gradient py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">혁신적인 기술</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+        BusyBee만의 고유한 기술로 콜센터 운BusyBee만의 고유한 기술로 콜센터 운영의 근본적인 문제를 해결하고 더 나은 고객 경험을 제공합니다.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+        <div class="bg-white p-6 rounded-lg shadow-md feature-card relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-100 rounded-full -mr-16 -mt-16 z-0"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-4">고급 음성 인식 기술</h3>
+            <p class="text-gray-600 text-center">
+              전화선 압축 환경에서도 뛰어난 정확도를 보이는 특허 출원 음성 인식 기술 적용
+            </p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md feature-card relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-100 rounded-full -mr-16 -mt-16 z-0"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-4">실시간 응답 생성 엔진</h3>
+            <p class="text-gray-600 text-center">
+              기존 LLM의 한계를 극복한 독자적인 응답 생성 알고리즘으로 대화 도중에도 자연스러운 응답 생성
+            </p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md feature-card relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-100 rounded-full -mr-16 -mt-16 z-0"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-4">상황 인식 및 감정 분석</h3>
+            <p class="text-gray-600 text-center">
+              고객의 목소리 톤, 감정, 상황을 실시간으로 분석하여 적절한 대응 제공
+            </p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md feature-card relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-100 rounded-full -mr-16 -mt-16 z-0"></div>
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-4">자동 학습 시스템</h3>
+            <p class="text-gray-600 text-center">
+              매 통화마다 학습하여 지속적으로 서비스 품질 향상
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 비즈니스 혜택 섹션 -->
+  <section id="benefits" class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">비즈니스 혜택</h2>
+      <p class="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+        BusyBee를 도입하면 콜센터 운영에 혁신적인 변화가 일어납니다.
+      </p>
+      
+      <div class="flex flex-col md:flex-row items-center justify-center">
+        <svg class="w-full max-w-3xl mx-auto" viewBox="0 0 800 300">
+          <!-- 비용 절감 카드 -->
+          <g transform="translate(140, 150)">
+            <rect x="-120" y="-110" width="240" height="220" rx="15" fill="#fff" filter="url(#cardShadow)" />
+            <circle cx="0" cy="-70" r="30" fill="#E8F5E9" />
+            <path d="M-10,-80 Q-15,-70 -10,-60 H10 Q15,-70 10,-80 Z" fill="#4CAF50" />
+            <circle cx="0" cy="-70" r="15" fill="#fff" />
+            <text x="0" y="-65" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#4CAF50">$</text>
+            
+            <text x="0" y="-20" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#444">비용 절감</text>
+            
+            <g transform="translate(-90, 0)">
+              <circle cx="0" cy="0" r="10" fill="#E8F5E9" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#4CAF50">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">인건비 80% 절감</text>
+            </g>
+            
+            <g transform="translate(-90, 30)">
+              <circle cx="0" cy="0" r="10" fill="#E8F5E9" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#4CAF50">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">교육 비용 감소</text>
+            </g>
+            
+            <g transform="translate(-90, 60)">
+              <circle cx="0" cy="0" r="10" fill="#E8F5E9" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#4CAF50">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">설비 비용 절감</text>
+            </g>
+            
+            <defs>
+              <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+                <feOffset dx="2" dy="4" />
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.3" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+          </g>
+          
+          <!-- 서비스 품질 카드 -->
+          <g transform="translate(400, 150)">
+            <rect x="-120" y="-110" width="240" height="220" rx="15" fill="#fff" filter="url(#cardShadow)" />
+            <circle cx="0" cy="-70" r="30" fill="#E3F2FD" />
+            <path d="M-15,-80 L0,-55 L15,-80 L8,-60 L20,-60 L5,-45 L15,-25 L-5,-40 L-20,-25 L-7,-50 L-20,-60 L-7,-60 Z" fill="#2196F3" />
+            
+            <text x="0" y="-20" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#444">서비스 품질 향상</text>
+            
+            <g transform="translate(-90, 0)">
+              <circle cx="0" cy="0" r="10" fill="#E3F2FD" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2196F3">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">대기 시간 제로화</text>
+            </g>
+            
+            <g transform="translate(-90, 30)">
+              <circle cx="0" cy="0" r="10" fill="#E3F2FD" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2196F3">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">응대 품질 일관성</text>
+            </g>
+            
+            <g transform="translate(-90, 60)">
+              <circle cx="0" cy="0" r="10" fill="#E3F2FD" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2196F3">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">고객 만족도 향상</text>
+            </g>
+          </g>
+          
+          <!-- 운영 효율성 카드 -->
+          <g transform="translate(660, 150)">
+            <rect x="-120" y="-110" width="240" height="220" rx="15" fill="#fff" filter="url(#cardShadow)" />
+            <circle cx="0" cy="-70" r="30" fill="#F3E5F5" />
+            
+            <!-- 그래프 아이콘 -->
+            <rect x="-15" y="-80" width="6" height="15" rx="2" fill="#9C27B0" />
+            <rect x="-5" y="-85" width="6" height="20" rx="2" fill="#9C27B0" />
+            <rect x="5" y="-75" width="6" height="10" rx="2" fill="#9C27B0" />
+            <rect x="15" y="-90" width="6" height="25" rx="2" fill="#9C27B0" />
+            <!-- 그래프 선 -->
+            <path d="M-15,-65 L-15,-65 L-2,-75 L8,-65 L18,-65" fill="none" stroke="#9C27B0" stroke-width="2" stroke-linecap="round" />
+            
+            <text x="0" y="-20" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#444">운영 효율성</text>
+            
+            <g transform="translate(-90, 0)">
+              <circle cx="0" cy="0" r="10" fill="#F3E5F5" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#9C27B0">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">피크 시간대 관리</text>
+            </g>
+            
+            <g transform="translate(-90, 30)">
+              <circle cx="0" cy="0" r="10" fill="#F3E5F5" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#9C27B0">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">자동 데이터 분석</text>
+            </g>
+            
+            <g transform="translate(-90, 60)">
+              <circle cx="0" cy="0" r="10" fill="#F3E5F5" />
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#9C27B0">✓</text>
+              <text x="25" y="5" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#444">핵심 업무 집중</text>
+            </g>
+          </g>
+          
+          <!-- 연결선 -->
+          <path d="M270,150 H320" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5" />
+          <path d="M530,150 H580" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5" />
+          
+          <!-- 중앙 연결 아이콘 - BusyBee 로고 -->
+          <g transform="translate(400, 60)">
+            <circle cx="0" cy="0" r="40" fill="#FFF8E1" stroke="#FFD700" stroke-width="2" />
+            
+            <!-- 간소화된 벌 아이콘 -->
+            <ellipse cx="-10" cy="0" rx="15" ry="12" fill="#FFC107" />
+            <rect x="-15" y="-4" width="10" height="3" rx="1.5" fill="#222" />
+            <rect x="-15" y="2" width="10" height="3" rx="1.5" fill="#222" />
+            <circle cx="5" cy="0" r="7" fill="#FFC107" />
+            <circle cx="7" cy="-2" r="1.5" fill="#222" /> <!-- 눈 -->
+            <circle cx="7" cy="2" r="1.5" fill="#222" /> <!-- 눈 -->
+            <path d="M9 -3 Q12 -6 15 -4" stroke="#222" stroke-width="1" fill="none" />
+            <path d="M9 3 Q12 6 15 4" stroke="#222" stroke-width="1" fill="none" />
+            
+            <!-- 텍스트 -->
+            <text x="0" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFA500">BusyBee</text>
+          </g>
+        </svg>
+      </div>
+      
+      <!-- 통계 데이터 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div class="p-6 bg-white rounded-xl shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">비용 절감</h3>
+            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="mb-4">
+            <span class="text-4xl font-bold text-green-600">80%</span>
+            <span class="text-sm text-gray-500 ml-2">절감</span>
+          </div>
+          <p class="text-gray-600">콜센터 인건비 및 운영 비용을 크게 절감하여 더 효율적인 비즈니스 운영이 가능합니다.</p>
+        </div>
+        <div class="p-6 bg-white rounded-xl shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">고객 만족도</h3>
+            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="mb-4">
+            <span class="text-4xl font-bold text-blue-600">35%</span>
+            <span class="text-sm text-gray-500 ml-2">향상</span>
+          </div>
+          <p class="text-gray-600">대기 시간 없는 즉각적인 응대와 일관된 서비스 품질로 고객 만족도가 크게 향상됩니다.</p>
+        </div>
+        <div class="p-6 bg-white rounded-xl shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">ROI</h3>
+            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="mb-4">
+            <span class="text-4xl font-bold text-purple-600">6-8</span>
+            <span class="text-sm text-gray-500 ml-2">개월</span>
+          </div>
+          <p class="text-gray-600">초기 투자 회수 기간이 6-8개월로, 빠른 시간 내에 투자 대비 효과를 볼 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 직접 체험 섹션 -->
+  <section id="demo" class="hero-gradient py-20 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6">직접 체험해 보세요!</h2>
+      <p class="text-xl mb-10 max-w-3xl mx-auto">
+        BusyBee의 혁신적인 AI 콜센터 기술을 지금 바로 체험해 보세요.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white text-gray-800 p-8 rounded-xl shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+          <div class="flex justify-center">
+            <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-10 h-10 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM15 3a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2z"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">식당예약 시범서비스</h3>
+          <p class="mb-6 text-gray-600">영어로 레스토랑 예약 서비스를 체험해보세요.</p>
+          <div class="flex justify-center items-center mb-6">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-4">
+              <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+              </svg>
+            </div>
+            <div class="text-2xl font-bold text-yellow-500 buzz-animation">+1-804-365-7801</div>
+          </div>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-full w-full font-semibold shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            지금 바로 전화하기
+          </button>
+        </div>
+        <div class="bg-white text-gray-800 p-8 rounded-xl shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+          <div class="flex justify-center">
+            <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-10 h-10 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5H6a1 1 0 01-.863-.5 1 1 0 01-.5-.874A3 3 0 018 3h5.314a1 1 0 01.94.653l1.71 4.104a1 1 0 01.023.196v2A2.5 2.5 0 0116.95 16H18a1 1 0 001-1V5a1 1 0 00-1-1h-1.1a1 1 0 01-.97-.757l-.692-2.748A1 1 0 0014.25 0H9a3 3 0 00-3 3v1"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">퀵서비스 요청전화</h3>
+          <p class="mb-6 text-gray-600">한국어로 배송 서비스를 체험해보세요.</p>
+          <div class="flex justify-center items-center mb-6">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-4">
+              <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+              </svg>
+            </div>
+            <div class="text-2xl font-bold text-yellow-500 buzz-animation">+1-208-875-7801</div>
+          </div>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-full w-full font-semibold shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            지금 바로 전화하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 적용 사례 섹션 -->
+  <section id="cases" class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">적용 사례</h2>
+      <p class="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+        BusyBee는 다양한 산업 분야에서 놀라운 성과를 보여주고 있습니다.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <!-- 금융 부문 -->
+        <div class="case-study-card relative overflow-hidden rounded-xl shadow-lg group">
+          <img src="/api/placeholder/600/400" alt="금융 서비스" class="w-full h-64 object-cover">
+          <div class="case-study-overlay absolute inset-0 bg-yellow-500 opacity-0 transition-opacity duration-300 flex flex-col justify-center items-center p-6">
+            <h3 class="text-white text-xl font-bold mb-4">금융 부문</h3>
+            <ul class="text-white space-y-2">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>대기 시간 97% 감소</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>고객 만족도 35% 상승</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>연간 운영 비용 65% 절감</span>
+              </li>
+            </ul>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-white">
+            <h3 class="text-xl font-bold">금융 부문</h3>
+            <p class="text-gray-600">계좌 조회, 송금 확인 등 24시간 서비스</p>
+          </div>
+        </div>
+        
+        <!-- 통신 산업 -->
+        <div class="case-study-card relative overflow-hidden rounded-xl shadow-lg group">
+          <img src="/api/placeholder/600/400" alt="통신 서비스" class="w-full h-64 object-cover">
+          <div class="case-study-overlay absolute inset-0 bg-yellow-500 opacity-0 transition-opacity duration-300 flex flex-col justify-center items-center p-6">
+            <h3 class="text-white text-xl font-bold mb-4">통신 산업</h3>
+            <ul class="text-white space-y-2">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>첫 통화 해결률 40% 향상</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>상담원 번아웃 감소</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>24시간 서비스로 고객 충성도 증가</span>
+              </li>
+            </ul>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-white">
+            <h3 class="text-xl font-bold">통신 산업</h3>
+            <p class="text-gray-600">서비스 장애 신고, 요금제 문의 자동화</p>
+          </div>
+        </div>
+        
+        <!-- 식당 예약 서비스 -->
+        <div class="case-study-card relative overflow-hidden rounded-xl shadow-lg group">
+          <img src="/api/placeholder/600/400" alt="식당 예약" class="w-full h-64 object-cover">
+          <div class="case-study-overlay absolute inset-0 bg-yellow-500 opacity-0 transition-opacity duration-300 flex flex-col justify-center items-center p-6">
+            <h3 class="text-white text-xl font-bold mb-4">식당 예약 서비스</h3>
+            <ul class="text-white space-y-2">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>예약 처리 시간 90% 단축</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>피크타임 예약 콜 100% 응대</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>특별 요청 및 알레르기 정보 정확한 기록</span>
+              </li>
+            </ul>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-white">
+            <h3 class="text-xl font-bold">식당 예약 서비스</h3>
+            <p class="text-gray-600">예약 변경 및 취소 자동 처리</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 항공사 고객 서비스 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11.43a1 1 0 01.725-.962l5-1.429a1 1 0 001.17-1.409l-7-14z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4">항공사 고객 서비스</h3>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>예약 변경 및 취소 처리 자동화로 80% 처리 시간 단축</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>다국어 지원으로 글로벌 고객 동시 응대</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 보험 산업 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4">보험 산업</h3>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>보험금 청구 접수 절차 간소화</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>단순 보험금 청구 상태 조회 100% 자동화</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 퀵서비스/배달 산업 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5H6a1 1 0 01-.863-.5 1 1 0 01-.5-.874A3 3 0 018 3h5.314a1 1 0 01.94.653l1.71 4.104a1 1 0 01.023.196v2A2.5 2.5 0 0116.95 16H18a1 1 0 001-1V5a1 1 0 00-1-1h-1.1a1 1 0 01-.97-.757l-.692-2.748A1 1 0 0014.25 0H9a3 3 0 00-3 3v1"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4">퀵서비스/배달 산업</h3>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>주문 접수 완전 자동화</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>피크타임 주문 폭주 시에도 100% 콜 응대</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 차별화 포인트 섹션 -->
+  <section class="section-gradient py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">차별화 포인트</h2>
+      <p class="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+        BusyBee는 기존 솔루션과 비교했을 때 월등한 차별화 포인트를 제공합니다.
+      </p>
+      
+      <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="min-w-full">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="py-4 px-6 text-left text-lg font-bold text-gray-700">기능</th>
+                <th class="py-4 px-6 text-center text-lg font-bold text-gray-700">전통적 콜센터</th>
+                <th class="py-4 px-6 text-center text-lg font-bold text-gray-700">기본 IVR 시스템</th>
+                <th class="py-4 px-6 text-center text-lg font-bold text-gray-700">경쟁 AI 솔루션</th>
+                <th class="py-4 px-6 text-center text-lg font-bold text-yellow-500">BusyBee</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-6 text-gray-700 font-medium">24/7 서비스</td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center bg-yellow-50">
+                  <svg class="w-6 h-6 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-6 text-gray-700 font-medium">자연스러운 대화</td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <span class="inline-block w-6 h-6 bg-yellow-200 rounded-full text-yellow-600 font-bold text-center leading-6">△</span>
+                </td>
+                <td class="py-4 px-6 text-center bg-yellow-50">
+                  <svg class="w-6 h-6 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a11 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-6 text-gray-700 font-medium">실시간 응답</td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center bg-yellow-50">
+                  <svg class="w-6 h-6 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-6 text-gray-700 font-medium">전화선 최적화</td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center bg-yellow-50">
+                  <svg class="w-6 h-6 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-6 text-gray-700 font-medium">다국어 지원</td>
+                <td class="py-4 px-6 text-center">
+                  <span class="inline-block w-6 h-6 bg-yellow-200 rounded-full text-yellow-600 font-bold text-center leading-6">△</span>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <svg class="w-6 h-6 mx-auto text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+                <td class="py-4 px-6 text-center">
+                  <span class="inline-block w-6 h-6 bg-yellow-200 rounded-full text-yellow-600 font-bold text-center leading-6">△</span>
+                </td>
+                <td class="py-4 px-6 text-center bg-yellow-50">
+                  <svg class="w-6 h-6 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API 섹션 -->
+  <section id="api" class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">BusyBee API 플랫폼</h2>
+      <p class="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+        이미 자체 시스템을 운영 중이거나 화이트 라벨 솔루션이 필요하신가요? BusyBee API 플랫폼을 통해 귀사의 서비스에 AI 음성 기능을 쉽게 통합할 수 있습니다.
+      </p>
+      
+      <div class="flex flex-col lg:flex-row items-center mb-20">
+        <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+          <svg class="w-full max-w-lg mx-auto" viewBox="0 0 800 500">
+            <!-- BusyBee API 플랫폼 중앙 박스 -->
+            <g transform="translate(400, 250)">
+              <rect x="-150" y="-100" width="300" height="200" rx="15" fill="url(#boxGradient)" stroke="url(#mainGradient)" stroke-width="3" />
+              
+              <text x="0" y="-60" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">
+                BusyBee API 플랫폼
+              </text>
+              
+              <!-- API 모듈 박스들 -->
+              <rect x="-130" y="-35" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="-90" y="-15" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                음성 처리 API
+              </text>
+              
+              <rect x="-40" y="-35" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="0" y="-15" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                대화 관리 API
+              </text>
+              
+              <rect x="50" y="-35" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="90" y="-15" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                지식 관리 API
+              </text>
+              
+              <rect x="-130" y="5" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="-90" y="25" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                응답 생성 API
+              </text>
+              
+              <rect x="-40" y="5" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="0" y="25" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                감정 분석 API
+              </text>
+              
+              <rect x="50" y="5" width="80" height="30" rx="5" fill="#FFF8E1" stroke="#FFD700" stroke-width="1" />
+              <text x="90" y="25" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+                통합 분석 API
+              </text>
+              
+              <!-- 로고 -->
+              <g transform="translate(0, 70) scale(0.8)">
+                <ellipse cx="0" cy="0" rx="18" ry="15" fill="#FFC107" />
+                <rect x="-10" y="-5" width="20" height="3" rx="1.5" fill="#222" />
+                <rect x="-10" y="3" width="20" height="3" rx="1.5" fill="#222" />
+                <circle cx="15" cy="0" r="8" fill="#FFC107" />
+                <circle cx="18" cy="-2" r="2" fill="#222" />
+                <circle cx="18" cy="2" r="2" fill="#222" />
+              </g>
+              
+              <defs>
+                <!-- 그라데이션 정의 -->
+                <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFD700" />
+                  <stop offset="100%" stop-color="#FFA500" />
+                </linearGradient>
+                
+                <linearGradient id="boxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff" />
+                  <stop offset="100%" stop-color="#f9f9f9" />
+                </linearGradient>
+              </defs>
+            </g>
+            
+            <!-- 파트너 비즈니스 시스템 박스 -->
+            <g transform="translate(400, 60)">
+              <rect x="-200" y="-40" width="400" height="80" rx="10" fill="url(#boxGradient)" stroke="#6c757d" stroke-width="2" />
+              
+              <text x="0" y="-15" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">
+                파트너 비즈니스 시스템
+              </text>
+              
+              <rect x="-170" y="5" width="90" height="25" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1" />
+              <text x="-125" y="22" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">
+                예약 시스템
+              </text>
+              
+              <rect x="-50" y="5" width="90" height="25" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1" />
+              <text x="-5" y="22" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">
+                CRM 시스템
+              </text>
+              
+              <rect x="70" y="5" width="90" height="25" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1" />
+              <text x="115" y="22" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">
+                기타 업무 시스템
+              </text>
+            </g>
+            
+            <!-- 파트너 통합 레이어 -->
+            <g transform="translate(400, 150)">
+              <rect x="-150" y="-25" width="300" height="50" rx="8" fill="#e9ecef" stroke="#6c757d" stroke-width="1" />
+              
+              <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+                파트너 통합 레이어
+              </text>
+              
+              <text x="0" y="18" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">
+                (API 키, 웹훅, 데이터 매핑)
+              </text>
+            </g>
+            
+            <!-- 통신 인프라 연동 -->
+            <g transform="translate(400, 380)">
+              <rect x="-150" y="-25" width="300" height="50" rx="8" fill="#e9ecef" stroke="#6c757d" stroke-width="1" />
+              
+              <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+                통신 인프라 연동
+              </text>
+              
+              <text x="0" y="18" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">
+                (SIP, PSTN, WebRTC, VoIP)
+              </text>
+            </g>
+            
+            <!-- 고객 전화 -->
+            <g transform="translate(400, 460)">
+              <rect x="-80" y="-20" width="160" height="40" rx="20" fill="#f8f9fa" stroke="#6c757d" stroke-width="1" />
+              
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+                고객 전화
+              </text>
+              
+              <circle cx="-45" cy="0" r="10" fill="#FFC107" />
+              <path d="M-50,0 C-48,-2 -45,-3 -42,-1 Q-40,0 -38,2 Q-38,5 -42,5 C-45,5 -48,3 -50,0" fill="#fff" />
+            </g>
+            
+            <!-- 연결선 -->
+            <line x1="400" y1="100" x2="400" y2="125" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,3" />
+            <line x1="400" y1="175" x2="400" y2="150" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,3" />
+            <line x1="400" y1="350" x2="400" y2="355" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,3" />
+            <line x1="400" y1="405" x2="400" y2="440" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,3" />
+            
+            <!-- 연결 화살표 -->
+            <path d="M400,125 L395,135 L405,135 Z" fill="#6c757d" />
+            <path d="M400,355 L395,345 L405,345 Z" fill="#6c757d" />
+            <path d="M400,440 L395,430 L405,430 Z" fill="#6c757d" />
+          </svg>
+        </div>
+        <div class="lg:w-1/2">
+          <h3 class="text-2xl font-bold mb-6">핵심 API 서비스</h3>
+          <div class="space-y-6">
+            <div class="p-4 bg-white rounded-lg shadow-md api-box">
+              <div class="flex items-center mb-2">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold">음성 처리 API</h4>
+              </div>
+              <p class="text-gray-600 pl-14">전화 음성의 인식, 합성, 잡음 제거 및 화자 식별을 위한 API 세트</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow-md api-box">
+              <div class="flex items-center mb-2">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold">대화 관리 API</h4>
+              </div>
+              <p class="text-gray-600 pl-14">대화 흐름, 맥락 유지, 고객 의도 파악 및 정보 추출을 위한 API</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow-md api-box">
+              <div class="flex items-center mb-2">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold">지식 관리 API</h4>
+              </div>
+              <p class="text-gray-600 pl-14">파트너사 자체 DB/지식 연동, 실시간 정보 검색 및 비즈니스 규칙 설정 API</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-xl p-8 mt-10">
+        <h3 class="text-2xl font-bold mb-6 text-center">파트너 커스터마이징 환경</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-center mb-4">파트너 대시보드</h4>
+            <p class="text-gray-600 text-center text-sm">직관적 웹 인터페이스로 코딩 지식 없이 기본 설정 관리</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-center mb-4">지식베이스 관리</h4>
+            <p class="text-gray-600 text-center text-sm">자체 DB 연동 및 콘텐츠 관리 시스템으로 지식 업데이트</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-center mb-4">대화 흐름 디자이너</h4>
+            <p class="text-gray-600 text-center text-sm">드래그 앤 드롭으로 대화 흐름을 시각적으로 설계하고 테스트</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-center mb-4">통합 커넥터</h4>
+            <p class="text-gray-600 text-center text-sm">기존 시스템과 간편한 연동 및 외부 시스템과 실시간 데이터 교환</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white p-8 rounded-xl shadow-lg mt-20">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="text-2xl font-bold text-center mb-8">글로벌 파트너십 시작하기</h3>
+          <p class="text-center text-gray-600 mb-10">
+            API 파트너십에 관심이 있으시면 다음 연락처로 문의해 주세요.
+          </p>
+          <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
+            <a href="mailto:partners@busybee.la" class="flex items-center justify-center bg-white py-4 px-8 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition">
+              <svg class="w-6 h-6 text-yellow-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+              </svg>
+              <span class="text-gray-700 font-medium">partners@busybee.la</span>
+            </a>
+            <a href="https://developers.busybee.la" target="_blank" class="flex items-center justify-center bg-white py-4 px-8 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition">
+              <svg class="w-6 h-6 text-yellow-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 font-medium">developers.busybee.la</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 고객 후기 섹션 -->
+  <section class="section-gradient py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">고객 후기</h2>
+      <p class="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+        실제 고객들이 경험한 BusyBee의 놀라운 가치를 직접 확인하세요.
+      </p>
+      
+      <div class="flex flex-col items-center mb-12">
+        <svg class="w-full max-w-4xl mx-auto" viewBox="0 0 800 250">
+          <!-- 첫 번째 후기 카드 -->
+          <g transform="translate(150, 125)">
+            <rect x="-140" y="-100" width="280" height="200" rx="15" fill="#fff" filter="url(#testimonialShadow)" />
+            <rect x="-140" y="-100" width="280" height="60" rx="15" fill="url(#cardGradient1)" />
+            <rect x="-140" y="-40" width="280" height="140" rx="0 0 15 15" fill="#fff" />
+            
+            <!-- 프로필 -->
+            <circle cx="-100" cy="-70" r="25" fill="#fff" />
+            <circle cx="-100" cy="-70" r="23" fill="#2196F3" opacity="0.2" />
+            <text x="-100" y="-65" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2196F3">김</text>
+            
+            <!-- 이름과 직책 -->
+            <text x="-50" y="-80" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#333">
+              김정호
+            </text>
+            <text x="-50" y="-60" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+              ABC 금융 CTO
+            </text>
+            
+            <!-- 따옴표 아이콘 -->
+            <text x="-120" y="-10" font-family="Arial, sans-serif" font-size="40" text-anchor="start" fill="#E3F2FD">
+              "
+            </text>
+            
+            <!-- 후기 내용 -->
+            <foreignObject x="-120" y="0" width="240" height="80">
+              <p xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #555; font-style: italic; margin: 0;">
+                BusyBee 도입 후 고객 응대 시간이 68% 줄었고, 직원들은 더 가치 있는 업무에 집중할 수 있게 되었습니다.
+              </p>
+            </foreignObject>
+            
+            <!-- 별점 -->
+            <g transform="translate(-120, 90)">
+              <polygon points="0,0 3,9 12,9 5,15 8,24 0,18 -8,24 -5,15 -12,9 -3,9" fill="#FFC107" />
+              <polygon points="30,0 33,9 42,9 35,15 38,24 30,18 22,24 25,15 18,9 27,9" fill="#FFC107" />
+              <polygon points="60,0 63,9 72,9 65,15 68,24 60,18 52,24 55,15 48,9 57,9" fill="#FFC107" />
+              <polygon points="90,0 93,9 102,9 95,15 98,24 90,18 82,24 85,15 78,9 87,9" fill="#FFC107" />
+              <polygon points="120,0 123,9 132,9 125,15 128,24 120,18 112,24 115,15 108,9 117,9" fill="#FFC107" />
+            </g>
+            
+            <defs>
+              <linearGradient id="cardGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E3F2FD" />
+                <stop offset="100%" stop-color="#BBDEFB" />
+              </linearGradient>
+              
+              <filter id="testimonialShadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                <feOffset dx="2" dy="3" />
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.2" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+          </g>
+          
+          <!-- 두 번째 후기 카드 -->
+          <g transform="translate(400, 125)">
+            <rect x="-140" y="-100" width="280" height="200" rx="15" fill="#fff" filter="url(#testimonialShadow)" />
+            <rect x="-140" y="-100" width="280" height="60" rx="15" fill="url(#cardGradient2)" />
+            <rect x="-140" y="-40" width="280" height="140" rx="0 0 15 15" fill="#fff" />
+            
+            <!-- 프로필 -->
+            <circle cx="-100" cy="-70" r="25" fill="#fff" />
+            <circle cx="-100" cy="-70" r="23" fill="#FF9800" opacity="0.2" />
+            <text x="-100" y="-65" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FF9800">박</text>
+            
+            <!-- 이름과 직책 -->
+            <text x="-50" y="-80" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#333">
+              박소영
+            </text>
+            <text x="-50" y="-60" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+              XYZ 쇼핑몰 고객경험 책임자
+            </text>
+            
+            <!-- 따옴표 아이콘 -->
+            <text x="-120" y="-10" font-family="Arial, sans-serif" font-size="40" text-anchor="start" fill="#FFF3E0">
+              "
+            </text>
+            
+            <!-- 후기 내용 -->
+            <foreignObject x="-120" y="0" width="240" height="80">
+              <p xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #555; font-style: italic; margin: 0;">
+                처음에는 반신반의했지만, BusyBee는 우리의 모든 기대를 뛰어넘었습니다. 고객들은 AI와 대화하고 있다는 사실조차 인지하지 못합니다.
+              </p>
+            </foreignObject>
+            
+            <!-- 별점 -->
+            <g transform="translate(-120, 90)">
+              <polygon points="0,0 3,9 12,9 5,15 8,24 0,18 -8,24 -5,15 -12,9 -3,9" fill="#FFC107" />
+              <polygon points="30,0 33,9 42,9 35,15 38,24 30,18 22,24 25,15 18,9 27,9" fill="#FFC107" />
+              <polygon points="60,0 63,9 72,9 65,15 68,24 60,18 52,24 55,15 48,9 57,9" fill="#FFC107" />
+              <polygon points="90,0 93,9 102,9 95,15 98,24 90,18 82,24 85,15 78,9 87,9" fill="#FFC107" />
+              <polygon points="120,0 123,9 132,9 125,15 128,24 120,18 112,24 115,15 108,9 117,9" fill="#FFC107" opacity="0.3" />
+              <path d="M120,0 L123,9 L132,9 L125,15 L128,24 L120,18" fill="#FFC107" />
+            </g>
+            
+            <defs>
+              <linearGradient id="cardGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF3E0" />
+                <stop offset="100%" stop-color="#FFE0B2" />
+              </linearGradient>
+            </defs>
+          </g>
+          
+          <!-- 세 번째 후기 카드 -->
+          <g transform="translate(650, 125)">
+            <rect x="-140" y="-100" width="280" height="200" rx="15" fill="#fff" filter="url(#testimonialShadow)" />
+            <rect x="-140" y="-100" width="280" height="60" rx="15" fill="url(#cardGradient3)" />
+            <rect x="-140" y="-40" width="280" height="140" rx="0 0 15 15" fill="#fff" />
+            
+            <!-- 프로필 -->
+            <circle cx="-100" cy="-70" r="25" fill="#fff" />
+            <circle cx="-100" cy="-70" r="23" fill="#4CAF50" opacity="0.2" />
+            <text x="-100" y="-65" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#4CAF50">이</text>
+            
+            <!-- 이름과 직책 -->
+            <text x="-50" y="-80" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#333">
+              이민준
+            </text>
+            <text x="-50" y="-60" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+              DEF 통신 운영 디렉터
+            </text>
+            
+            <!-- 따옴표 아이콘 -->
+            <text x="-120" y="-10" font-family="Arial, sans-serif" font-size="40" text-anchor="start" fill="#E8F5E9">
+              "
+            </text>
+            
+            <!-- 후기 내용 -->
+            <foreignObject x="-120" y="0" width="240" height="80">
+              <p xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #555; font-style: italic; margin: 0;">
+                콜센터 운영 비용이 75% 감소했으며, 고객 만족도는 오히려 상승했습니다. 투자 대비 최고의 결정이었습니다.
+              </p>
+            </foreignObject>
+            
+            <!-- 별점 -->
+            <g transform="translate(-120, 90)">
+              <polygon points="0,0 3,9 12,9 5,15 8,24 0,18 -8,24 -5,15 -12,9 -3,9" fill="#FFC107" />
+              <polygon points="30,0 33,9 42,9 35,15 38,24 30,18 22,24 25,15 18,9 27,9" fill="#FFC107" />
+              <polygon points="60,0 63,9 72,9 65,15 68,24 60,18 52,24 55,15 48,9 57,9" fill="#FFC107" />
+              <polygon points="90,0 93,9 102,9 95,15 98,24 90,18 82,24 85,15 78,9 87,9" fill="#FFC107" />
+              <polygon points="120,0 123,9 132,9 125,15 128,24 120,18 112,24 115,15 108,9 117,9" fill="#FFC107" />
+            </g>
+            
+            <defs>
+              <linearGradient id="cardGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E8F5E9" />
+                <stop offset="100%" stop-color="#C8E6C9" />
+              </linearGradient>
+            </defs>
+          </g>
+          
+          <!-- 연결선 및 장식 -->
+          <line x1="280" y1="125" x2="320" y2="125" stroke="#eee" stroke-width="3" />
+          <line x1="480" y1="125" x2="520" y2="125" stroke="#eee" stroke-width="3" />
+          
+          <circle cx="300" cy="125" r="5" fill="#FFC107" />
+          <circle cx="500" cy="125" r="5" fill="#FFC107" />
+          
+          <!-- 벌 장식 요소 -->
+          <g transform="translate(400, 30)">
+            <ellipse cx="0" cy="0" rx="15" ry="12" fill="#FFC107" />
+            <rect x="-8" y="-4" width="16" height="3" rx="1.5" fill="#222" />
+            <rect x="-8" y="2" width="16" height="3" rx="1.5" fill="#222" />
+            <ellipse cx="-10" cy="-5" rx="8" ry="6" fill="rgba(255, 255, 255, 0.7)" transform="rotate(-20, -10, -5)" />
+            <ellipse cx="-10" cy="5" rx="8" ry="6" fill="rgba(255, 255, 255, 0.7)" transform="rotate(20, -10, 5)" />
+            <circle cx="10" cy="0" r="6" fill="#FFC107" />
+            <circle cx="13" cy="-2" r="1.5" fill="#222" />
+            <circle cx="13" cy="2" r="1.5" fill="#222" />
+            <path d="M15 -3 Q18 -6 21 -4" stroke="#222" stroke-width="1" fill="none" />
+            <path d="M15 3 Q18 6 21 4" stroke="#222" stroke-width="1" fill="none" />
+          </g>
+          
+          <!-- 장식 텍스트 -->
+          <text x="400" y="235" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#666">
+            고객들이 사랑하는 BusyBee
+          </text>
+        </svg>
+      </div>
+      
+      <div class="max-w-4xl mx-auto mt-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div class="text-right">
+            <h3 class="text-2xl font-bold mb-4">100+</h3>
+            <p class="text-gray-600">고객사</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">95%</h3>
+            <p class="text-gray-600">고객 만족도</p>
+          </div>
+          <div class="text-right">
+            <h3 class="text-2xl font-bold mb-4">500만+</h3>
+            <p class="text-gray-600">월간 통화량</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">78%</h3>
+            <p class="text-gray-600">평균 비용 절감률</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연락처 섹션 -->
+  <section id="contact" class="hero-gradient py-20 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-10">연락처</h2>
+      <p class="text-xl mb-10 max-w-3xl mx-auto">
+        혁신적인 BusyBee AI 콜센터 솔루션에 대해 더 알아보시려면 지금 바로 연락주세요:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <i class="fas fa-phone-alt text-yellow-500 text-3xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">본사</h3>
+          <div class="text-xl font-semibold text-yellow-500">+82-10-2188-3345</div>
+        </div>
+        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <i class="fas fa-envelope text-yellow-500 text-3xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">이메일</h3>
+          <div class="text-xl font-semibold text-yellow-500">aprilrushh@gmail.com</div>
+        </div>
+        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+          <i class="fas fa-globe text-yellow-500 text-3xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">웹사이트</h3>
+          <div class="text-xl font-semibold text-yellow-500">www.busybee.la</div>
+        </div>
+      </div>
+      <p class="text-2xl font-bold mt-12">미래의 콜센터를 경험할 준비가 되셨나요?</p>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="bg-gray-800 text-white py-10">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-bold text-yellow-500 flex items-center">
+            <i class="fas fa-bee mr-2"></i> BusyBee
+          </a>
+          <p class="text-gray-400 mt-2">콜센터의 미래를 선도하는 AI 솔루션</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <hr class="border-gray-700 my-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="mb-4 md:mb-0">© 2025 BusyBee AI Solutions. All rights reserved.</p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-white">이용약관</a>
+          <a href="#" class="text-gray-400 hover:text-white">개인정보 처리방침</a>
+          <a href="#" class="text-gray-400 hover:text-white">고객지원</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 상단 이동 버튼 -->
+  <div class="top-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // 네비게이션 스크롤 이벤트
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-white', 'shadow-md');
+      } else {
+        nav.classList.remove('bg-white', 'shadow-md');
+      }
+    });
+    
+    // 상단 이동 버튼 표시/숨김
+    window.addEventListener('scroll', function() {
+      const topButton = document.querySelector('.top-button');
+      if (window.scrollY > 300) {
+        topButton.style.display = 'flex';
+      } else {
+        topButton.style.display = 'none';
+      }
+    });
+  </script>
+</body>
 </html>
