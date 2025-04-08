@@ -235,6 +235,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                 <a href="tel:+18043657801" class="cta-button">레스토랑 예약 시연</a>
                 <a href="#" class="cta-button">호텔 예약 시연</a>
                 <a href="#" class="cta-button">텔레마케팅 시연</a>
+                <a href="#" class="cta-button">콜센터 예약 시연</a>
                 <a href="#" class="cta-button primary">미팅 예약하기</a>
             </div>
 
@@ -337,6 +338,7 @@ with AI voice agents indistinguishable from humans.</p>
                 <a href="tel:+18043657801" class="cta-button">Try Restaurant Reservation</a>
                 <a href="#" class="cta-button">Try Hotel Reservation</a>
                 <a href="#" class="cta-button">Try Telemarketing</a>
+                <a href="#" class="cta-button">Try Call Center Services</a>
                 <a href="#" class="cta-button primary">Book a Meeting</a>
             </div>
 
@@ -450,11 +452,16 @@ with AI voice agents indistinguishable from humans.</p>
             // 레스토랑 예약 버튼에 툴팁 추가
             const koButton = document.querySelector('#ko-content .demo-buttons a:first-child');
             const enButton = document.querySelector('#en-content .demo-buttons a:first-child');
+            const koCallCenterButton = document.querySelector('#ko-content .demo-buttons a:nth-child(4)');
+            const enCallCenterButton = document.querySelector('#en-content .demo-buttons a:nth-child(4)');
             
             if(koButton) {
                 koButton.setAttribute('title', '전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.');
                 koButton.addEventListener('click', function(e) {
-                    if(!confirm('전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.')) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('모바일 기기를 사용하여 전화번호 804-365-7801로 전화해보세요. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험할 수 있습니다.');
+                        e.preventDefault();
+                    } else if(!confirm('전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.')) {
                         e.preventDefault();
                     }
                 });
@@ -463,9 +470,210 @@ with AI voice agents indistinguishable from humans.</p>
             if(enButton) {
                 enButton.setAttribute('title', 'Call USA 804-365-7801 to experience our AI agent taking a real restaurant reservation.');
                 enButton.addEventListener('click', function(e) {
-                    if(!confirm('You will be connected to USA 804-365-7801. Experience our AI agent taking a real restaurant reservation.')) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('Please use a mobile device to call or dial USA 804-365-7801 to experience our AI agent taking restaurant reservations.');
+                        e.preventDefault();
+                    } else if(!confirm('You will be connected to USA 804-365-7801. Experience our AI agent taking a real restaurant reservation.')) {
                         e.preventDefault();
                     }
+                });
+            }
+            
+            if(koCallCenterButton) {
+                koCallCenterButton.setAttribute('title', '은행, 보험사, 항공사, 인바운드콜, 아웃바운드 콜등 콜센터의 무인화 서비스를 제공합니다.');
+                koCallCenterButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 모달 창 만들기
+                    const modal = document.createElement('div');
+                    modal.style.position = 'fixed';
+                    modal.style.left = '0';
+                    modal.style.top = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+                    modal.style.zIndex = '1000';
+                    
+                    // 모달 내용
+                    const modalContent = document.createElement('div');
+                    modalContent.style.backgroundColor = 'white';
+                    modalContent.style.padding = '30px';
+                    modalContent.style.borderRadius = '10px';
+                    modalContent.style.maxWidth = '500px';
+                    modalContent.style.width = '90%';
+                    modalContent.style.textAlign = 'center';
+                    modalContent.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                    
+                    // 내용 추가
+                    const heading = document.createElement('h3');
+                    heading.textContent = '콜센터 무인화 서비스';
+                    heading.style.color = '#f39c12';
+                    heading.style.marginTop = '0';
+                    
+                    const text = document.createElement('p');
+                    text.textContent = '은행, 보험사, 항공사, 인바운드콜, 아웃바운드 콜등 콜센터의 무인화 서비스를 제공합니다.';
+                    text.style.margin = '20px 0';
+                    
+                    const button = document.createElement('button');
+                    button.textContent = '나의 맞춤 서비스 요청하기';
+                    button.style.backgroundColor = '#2ecc71';
+                    button.style.color = 'white';
+                    button.style.border = 'none';
+                    button.style.padding = '12px 24px';
+                    button.style.borderRadius = '30px';
+                    button.style.cursor = 'pointer';
+                    button.style.fontWeight = 'bold';
+                    button.style.marginTop = '10px';
+                    button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+                    button.style.transition = 'all 0.3s';
+                    
+                    button.addEventListener('mouseover', function() {
+                        button.style.backgroundColor = '#27ae60';
+                        button.style.transform = 'translateY(-2px)';
+                        button.style.boxShadow = '0 5px 10px rgba(0,0,0,0.15)';
+                    });
+                    
+                    button.addEventListener('mouseout', function() {
+                        button.style.backgroundColor = '#2ecc71';
+                        button.style.transform = 'translateY(0)';
+                        button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+                    });
+                    
+                    button.addEventListener('click', function() {
+                        alert('맞춤 서비스 요청이 접수되었습니다.');
+                        modal.remove();
+                    });
+                    
+                    // 닫기 버튼
+                    const closeButton = document.createElement('span');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.style.position = 'absolute';
+                    closeButton.style.top = '10px';
+                    closeButton.style.right = '20px';
+                    closeButton.style.fontSize = '30px';
+                    closeButton.style.cursor = 'pointer';
+                    closeButton.style.color = '#999';
+                    
+                    closeButton.addEventListener('click', function() {
+                        modal.remove();
+                    });
+                    
+                    modalContent.appendChild(heading);
+                    modalContent.appendChild(text);
+                    modalContent.appendChild(button);
+                    modalContent.appendChild(closeButton);
+                    modalContent.style.position = 'relative';
+                    
+                    modal.appendChild(modalContent);
+                    document.body.appendChild(modal);
+                    
+                    // 모달 외부 클릭 시 닫기
+                    modal.addEventListener('click', function(event) {
+                        if (event.target === modal) {
+                            modal.remove();
+                        }
+                    });
+                });
+            }
+            
+            if(enCallCenterButton) {
+                enCallCenterButton.setAttribute('title', 'We provide unmanned call center services for banks, insurance companies, airlines, inbound calls, outbound calls, and more.');
+                enCallCenterButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 모달 창 만들기
+                    const modal = document.createElement('div');
+                    modal.style.position = 'fixed';
+                    modal.style.left = '0';
+                    modal.style.top = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+                    modal.style.zIndex = '1000';
+                    
+                    // 모달 내용
+                    const modalContent = document.createElement('div');
+                    modalContent.style.backgroundColor = 'white';
+                    modalContent.style.padding = '30px';
+                    modalContent.style.borderRadius = '10px';
+                    modalContent.style.maxWidth = '500px';
+                    modalContent.style.width = '90%';
+                    modalContent.style.textAlign = 'center';
+                    modalContent.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                    
+                    // 내용 추가
+                    const heading = document.createElement('h3');
+                    heading.textContent = 'Unmanned Call Center Services';
+                    heading.style.color = '#f39c12';
+                    heading.style.marginTop = '0';
+                    
+                    const text = document.createElement('p');
+                    text.textContent = 'We provide unmanned call center services for banks, insurance companies, airlines, inbound calls, outbound calls, and more.';
+                    text.style.margin = '20px 0';
+                    
+                    const button = document.createElement('button');
+                    button.textContent = 'Request Customized Service';
+                    button.style.backgroundColor = '#2ecc71';
+                    button.style.color = 'white';
+                    button.style.border = 'none';
+                    button.style.padding = '12px 24px';
+                    button.style.borderRadius = '30px';
+                    button.style.cursor = 'pointer';
+                    button.style.fontWeight = 'bold';
+                    button.style.marginTop = '10px';
+                    button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+                    button.style.transition = 'all 0.3s';
+                    
+                    button.addEventListener('mouseover', function() {
+                        button.style.backgroundColor = '#27ae60';
+                        button.style.transform = 'translateY(-2px)';
+                        button.style.boxShadow = '0 5px 10px rgba(0,0,0,0.15)';
+                    });
+                    
+                    button.addEventListener('mouseout', function() {
+                        button.style.backgroundColor = '#2ecc71';
+                        button.style.transform = 'translateY(0)';
+                        button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+                    });
+                    
+                    button.addEventListener('click', function() {
+                        alert('Your customized service request has been received.');
+                        modal.remove();
+                    });
+                    
+                    // 닫기 버튼
+                    const closeButton = document.createElement('span');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.style.position = 'absolute';
+                    closeButton.style.top = '10px';
+                    closeButton.style.right = '20px';
+                    closeButton.style.fontSize = '30px';
+                    closeButton.style.cursor = 'pointer';
+                    closeButton.style.color = '#999';
+                    
+                    closeButton.addEventListener('click', function() {
+                        modal.remove();
+                    });
+                    
+                    modalContent.appendChild(heading);
+                    modalContent.appendChild(text);
+                    modalContent.appendChild(button);
+                    modalContent.appendChild(closeButton);
+                    modalContent.style.position = 'relative';
+                    
+                    modal.appendChild(modalContent);
+                    document.body.appendChild(modal);
+                    
+                    // 모달 외부 클릭 시 닫기
+                    modal.addEventListener('click', function(event) {
+                        if (event.target === modal) {
+                            modal.remove();
+                        }
+                    });
                 });
             }
         });
