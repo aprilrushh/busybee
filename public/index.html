@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             color: #333;
+            background-color: #f9f9f9;
         }
         
         .container {
@@ -28,7 +29,7 @@
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: #f39c12;
         }
@@ -58,51 +59,130 @@
             color: #2c3e50;
         }
         
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.8em;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .hero-section p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin: 30px 0;
         }
         
         .feature-card {
             border: 1px solid #eee;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .feature-card h3 {
             color: #f39c12;
             margin-top: 0;
+            font-size: 1.3em;
         }
         
         .hidden {
             display: none;
         }
         
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
         .cta-button {
             display: inline-block;
             background-color: #f39c12;
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.05em;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .cta-button:hover {
             background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .cta-button.primary {
+            background-color: #2ecc71;
+        }
+        
+        .cta-button.primary:hover {
+            background-color: #27ae60;
+        }
+        
+        .demo-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #2c3e50;
+        }
+        
+        .section {
+            margin: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #f39c12;
+            margin: 15px auto 0;
+            border-radius: 2px;
         }
         
         footer {
-            margin-top: 50px;
+            margin-top: 80px;
             border-top: 1px solid #eee;
-            padding: 20px 0;
+            padding: 30px 0;
             text-align: center;
             color: #7f8c8d;
+            background-color: #f8f9fa;
         }
     </style>
 </head>
@@ -142,174 +222,206 @@
 
         <!-- 한국어 컨텐츠 -->
         <div id="ko-content">
-            <h1>BusyBee - 혁신적인 AI Agent 콜센터 솔루션</h1>
-            <p>콜센터의 미래가 여기에 있습니다</p>
+            <div class="hero-section">
+                <h1>BusyBee</h1>
+                <h2 style="font-size: 1.5em; margin-top: 5px; color: white;">혁신적인 AI Agent 콜센터 솔루션</h2>
+                <p>이제 콜센터를 완전 무인화해보세요.<br>
+인간과 구분할 수 없고, 인간보다 더 뛰어난<br>
+AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
+            </div>
 
-            <h2>BusyBee란?</h2>
-            <p>BusyBee는 전통적인 콜센터 운영 방식을 완전히 혁신하는 최첨단 AI 기반 음성 에이전트 시스템입니다. 사람 상담원 대신 전화를 받고 고객 문의에 실시간으로 응대하는 완벽한 솔루션을 제공합니다.</p>
+            <h2 class="demo-title">Demo</h2>
+            <div class="demo-buttons">
+                <a href="tel:+18043657801" class="cta-button">레스토랑 예약 시연</a>
+                <a href="#" class="cta-button">호텔 예약 시연</a>
+                <a href="#" class="cta-button">텔레마케팅 시연</a>
+                <a href="#" class="cta-button primary">미팅 예약하기</a>
+            </div>
 
-            <h2>주요 특징</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>24/7/365 무중단 서비스</h3>
-                    <p>휴일, 야간, 주말 관계없이 항상 고객 응대 가능</p>
-                </div>
-                <div class="feature-card">
-                    <h3>실시간 자연스러운 대화</h3>
-                    <p>인간과 구분할 수 없는 자연스러운 대화 흐름</p>
-                </div>
-                <div class="feature-card">
-                    <h3>다국어 지원</h3>
-                    <p>다양한 언어로 전 세계 고객 지원</p>
-                </div>
-                <div class="feature-card">
-                    <h3>즉각적인 응답</h3>
-                    <p>대기 시간 없는 즉각적인 고객 응대</p>
-                </div>
-                <div class="feature-card">
-                    <h3>무제한 동시 통화 처리</h3>
-                    <p>피크 시간대에도 통화량에 상관없이 모든 전화 응대</p>
+            <div class="section">
+                <h2 class="section-title">BusyBee란?</h2>
+                <p>BusyBee는 전통적인 콜센터 운영 방식을 완전히 혁신하는 최첨단 AI 기반 음성 에이전트 시스템입니다. 사람 상담원 대신 전화를 받고 고객 문의에 실시간으로 응대하는 완벽한 솔루션을 제공합니다.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">주요 특징</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>24/7/365 무중단 서비스</h3>
+                        <p>휴일, 야간, 주말 관계없이 항상 고객 응대 가능</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>실시간 자연스러운 대화</h3>
+                        <p>인간과 구분할 수 없는 자연스러운 대화 흐름</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>다국어 지원</h3>
+                        <p>다양한 언어로 전 세계 고객 지원</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>즉각적인 응답</h3>
+                        <p>대기 시간 없는 즉각적인 고객 응대</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>무제한 동시 통화 처리</h3>
+                        <p>피크 시간대에도 통화량에 상관없이 모든 전화 응대</p>
+                    </div>
                 </div>
             </div>
 
-            <h2>혁신적인 기술</h2>
-            <p>BusyBee의 핵심 기술력:</p>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>고급 음성 인식 기술</h3>
-                    <p>전화선 압축 환경에서도 뛰어난 정확도를 보이는 음성 인식 기술 적용</p>
-                </div>
-                <div class="feature-card">
-                    <h3>실시간 응답 생성 엔진</h3>
-                    <p>기존 LLM의 한계를 극복한 독자적인 응답 생성 알고리즘으로 대화 도중에도 자연스러운 응답 생성</p>
-                </div>
-                <div class="feature-card">
-                    <h3>상황 인식 및 감정</h3>
-                    <p>고객의 감정, 상황을 실시간으로 분석하여 적절한 대응 제공</p>
-                </div>
-                <div class="feature-card">
-                    <h3>자동 학습 시스템</h3>
-                    <p>매 통화마다 학습하여 지속적으로 서비스 품질 향상</p>
-                </div>
-            </div>
-
-            <h2>비즈니스 혜택</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>비용 절감</h3>
-                    <ul>
-                        <li>인건비 최대 80% 절감</li>
-                        <li>교육 및 관리 비용 감소</li>
-                        <li>사무실 공간 및 설비 비용 절감</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>서비스 품질 향상</h3>
-                    <ul>
-                        <li>대기 시간 제로화</li>
-                        <li>응대 품질 일관성 유지</li>
-                        <li>고객 만족도 향상</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>운영 효율성</h3>
-                    <ul>
-                        <li>피크 시간대 인력 관리 문제 해소</li>
-                        <li>자동 데이터 수집 및 분석</li>
-                        <li>핵심 업무에 인적 자원 집중</li>
-                    </ul>
+            <div class="section">
+                <h2 class="section-title">혁신적인 기술</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>고급 음성 인식 기술</h3>
+                        <p>전화선 압축 환경에서도 뛰어난 정확도를 보이는 음성 인식 기술 적용</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>실시간 응답 생성 엔진</h3>
+                        <p>기존 LLM의 한계를 극복한 독자적인 응답 생성 알고리즘으로 대화 도중에도 자연스러운 응답 생성</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>상황 인식 및 감정</h3>
+                        <p>고객의 감정, 상황을 실시간으로 분석하여 적절한 대응 제공</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>자동 학습 시스템</h3>
+                        <p>매 통화마다 학습하여 지속적으로 서비스 품질 향상</p>
+                    </div>
                 </div>
             </div>
 
-            <h2>무료 시범 서비스 신청</h2>
-            <p>2주간 무료 파일럿 프로그램을 통해 BusyBee의 효과를 직접 확인해보세요.</p>
-            <a href="#" class="cta-button">무료 데모 신청하기</a>
+            <div class="section">
+                <h2 class="section-title">비즈니스 혜택</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>비용 절감</h3>
+                        <ul>
+                            <li>인건비 최대 80% 절감</li>
+                            <li>교육 및 관리 비용 감소</li>
+                            <li>사무실 공간 및 설비 비용 절감</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>서비스 품질 향상</h3>
+                        <ul>
+                            <li>대기 시간 제로화</li>
+                            <li>응대 품질 일관성 유지</li>
+                            <li>고객 만족도 향상</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>운영 효율성</h3>
+                        <ul>
+                            <li>피크 시간대 인력 관리 문제 해소</li>
+                            <li>자동 데이터 수집 및 분석</li>
+                            <li>핵심 업무에 인적 자원 집중</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 영어 컨텐츠 -->
         <div id="en-content" class="hidden">
-            <h1>BusyBee - Innovative AI Agent Call Center Solution</h1>
-            <p>The future of call centers is here</p>
+            <div class="hero-section">
+                <h1>BusyBee</h1>
+                <h2 style="font-size: 1.5em; margin-top: 5px; color: white;">Innovative AI Agent Call Center Solution</h2>
+                <p>The future of call centers is here.<br>
+Revolutionize customer experience<br>
+with AI voice agents indistinguishable from humans.</p>
+            </div>
 
-            <h2>What is BusyBee?</h2>
-            <p>BusyBee is a cutting-edge AI-based voice agent system that completely revolutionizes traditional call center operations. It provides a perfect solution that answers calls and responds to customer inquiries in real-time instead of human operators.</p>
+            <h2 class="demo-title">Demo</h2>
+            <div class="demo-buttons">
+                <a href="tel:+18043657801" class="cta-button">Try Restaurant Reservation</a>
+                <a href="#" class="cta-button">Try Hotel Reservation</a>
+                <a href="#" class="cta-button">Try Telemarketing</a>
+                <a href="#" class="cta-button primary">Book a Meeting</a>
+            </div>
 
-            <h2>Key Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>24/7/365 Uninterrupted Service</h3>
-                    <p>Always available for customer service regardless of holidays, nights, or weekends</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Real-time Natural Conversations</h3>
-                    <p>Natural conversation flow indistinguishable from humans</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Multilingual Support</h3>
-                    <p>Support for customers worldwide in various languages</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Immediate Response</h3>
-                    <p>Instant customer service without waiting time</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Unlimited Simultaneous Call Handling</h3>
-                    <p>Handles all calls regardless of call volume, even during peak hours</p>
+            <div class="section">
+                <h2 class="section-title">What is BusyBee?</h2>
+                <p>BusyBee is a cutting-edge AI-based voice agent system that completely revolutionizes traditional call center operations. It provides a perfect solution that answers calls and responds to customer inquiries in real-time instead of human operators.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>24/7/365 Uninterrupted Service</h3>
+                        <p>Always available for customer service regardless of holidays, nights, or weekends</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Natural Conversations</h3>
+                        <p>Natural conversation flow indistinguishable from humans</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Multilingual Support</h3>
+                        <p>Support for customers worldwide in various languages</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Immediate Response</h3>
+                        <p>Instant customer service without waiting time</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Unlimited Simultaneous Call Handling</h3>
+                        <p>Handles all calls regardless of call volume, even during peak hours</p>
+                    </div>
                 </div>
             </div>
 
-            <h2>Innovative Technology</h2>
-            <p>BusyBee's core technology:</p>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Advanced Voice Recognition Technology</h3>
-                    <p>Voice recognition technology that works smoothly with compressed voice through phone lines with outstanding accuracy</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Real-time Response Generation Engine</h3>
-                    <p>Proprietary response generation algorithm that overcomes the limitations of existing LLMs, generating natural responses even during conversations</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Situation Awareness and Emotion</h3>
-                    <p>Real-time analysis of customer emotions and situations to provide appropriate responses</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Automatic Learning System</h3>
-                    <p>Learns from every call to continuously improve service quality</p>
-                </div>
-            </div>
-
-            <h2>Business Benefits</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Cost Reduction</h3>
-                    <ul>
-                        <li>Up to 80% reduction in labor costs</li>
-                        <li>Decreased training and management costs</li>
-                        <li>Reduced office space and equipment costs</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>Service Quality Improvement</h3>
-                    <ul>
-                        <li>Zero waiting time</li>
-                        <li>Consistent response quality</li>
-                        <li>Increased customer satisfaction</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>Operational Efficiency</h3>
-                    <ul>
-                        <li>Elimination of peak hour staffing issues</li>
-                        <li>Automatic data collection and analysis</li>
-                        <li>Focus of human resources on core tasks</li>
-                    </ul>
+            <div class="section">
+                <h2 class="section-title">Innovative Technology</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Advanced Voice Recognition Technology</h3>
+                        <p>Voice recognition technology that works smoothly with compressed voice through phone lines with outstanding accuracy</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Response Generation Engine</h3>
+                        <p>Proprietary response generation algorithm that overcomes the limitations of existing LLMs, generating natural responses even during conversations</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Situation Awareness and Emotion</h3>
+                        <p>Real-time analysis of customer emotions and situations to provide appropriate responses</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Automatic Learning System</h3>
+                        <p>Learns from every call to continuously improve service quality</p>
+                    </div>
                 </div>
             </div>
 
-            <h2>Request Free Trial Service</h2>
-            <p>Experience the effectiveness of BusyBee through our 2-week free pilot program.</p>
-            <a href="#" class="cta-button">Request Free Demo</a>
+            <div class="section">
+                <h2 class="section-title">Business Benefits</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Cost Reduction</h3>
+                        <ul>
+                            <li>Up to 80% reduction in labor costs</li>
+                            <li>Decreased training and management costs</li>
+                            <li>Reduced office space and equipment costs</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Service Quality Improvement</h3>
+                        <ul>
+                            <li>Zero waiting time</li>
+                            <li>Consistent response quality</li>
+                            <li>Increased customer satisfaction</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Operational Efficiency</h3>
+                        <ul>
+                            <li>Elimination of peak hour staffing issues</li>
+                            <li>Automatic data collection and analysis</li>
+                            <li>Focus of human resources on core tasks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer>
@@ -333,6 +445,28 @@
             const detectedLang = detectLanguage();
             if (detectedLang !== 'ko') {
                 switchLanguage('en');
+            }
+            
+            // 레스토랑 예약 버튼에 툴팁 추가
+            const koButton = document.querySelector('#ko-content .demo-buttons a:first-child');
+            const enButton = document.querySelector('#en-content .demo-buttons a:first-child');
+            
+            if(koButton) {
+                koButton.setAttribute('title', '전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.');
+                koButton.addEventListener('click', function(e) {
+                    if(!confirm('전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            if(enButton) {
+                enButton.setAttribute('title', 'Call USA 804-365-7801 to experience our AI agent taking a real restaurant reservation.');
+                enButton.addEventListener('click', function(e) {
+                    if(!confirm('You will be connected to USA 804-365-7801. Experience our AI agent taking a real restaurant reservation.')) {
+                        e.preventDefault();
+                    }
+                });
             }
         });
 
