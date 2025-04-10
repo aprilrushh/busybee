@@ -718,6 +718,20 @@ with AI voice agents indistinguishable from humans.</p>
     </div>
 
     <script>
+        // HTML 다운로드 함수
+        function downloadHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'busybee-website.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
         // 전역 변수 및 함수 정의
         let currentLanguage = 'ko';
         
@@ -1150,8 +1164,4 @@ with AI voice agents indistinguishable from humans.</p>
         });
     </script>
 </body>
-</html>">
-                        <label for="ko-name">이름</label>
-                        <input type="text" id="ko-name" required>
-                    </div>
-                    <div class="form-group
+</html>
