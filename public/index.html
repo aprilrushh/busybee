@@ -352,13 +352,6 @@
                     <path fill="#fff" d="M20 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
                     m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
                     m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
                     m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z"/>
                 </svg>
             </div>
@@ -377,7 +370,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             <h2 class="demo-title">Demo</h2>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="ko-restaurant-btn">레스토랑 예약 시연</a>
-                <a href="#" class="cta-button">호텔 예약 시연</a>
+                <a href="tel:+14705547801" class="cta-button" id="ko-hotel-btn">호텔 예약 시연</a>
                 <a href="#" class="cta-button">텔레마케팅 시연</a>
                 <a href="#" class="cta-button" id="ko-callcenter-btn">콜센터 예약 시연</a>
                 <a href="#" class="cta-button primary" id="ko-meeting-btn">미팅 예약하기</a>
@@ -490,7 +483,7 @@ with AI voice agents indistinguishable from humans.</p>
             <h2 class="demo-title">Demo</h2>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="en-restaurant-btn">Try Restaurant Reservation</a>
-                <a href="#" class="cta-button">Try Hotel Reservation</a>
+                <a href="tel:+14705547801" class="cta-button" id="en-hotel-btn">Try Hotel Reservation</a>
                 <a href="#" class="cta-button">Try Telemarketing</a>
                 <a href="#" class="cta-button" id="en-callcenter-btn">Try Call Center Services</a>
                 <a href="#" class="cta-button primary" id="en-meeting-btn">Book a Meeting</a>
@@ -596,10 +589,6 @@ with AI voice agents indistinguishable from humans.</p>
                 <span class="close-modal">&times;</span>
                 <h3 class="modal-title">미팅 예약하기</h3>
                 <form id="ko-meeting-form">
-                    <div class="form-group">
-                        <label for="ko-name">이름</label>
-                        <input type="text" id="ko-name" required>
-                    </div>
                     <div class="form-group">
                         <label for="ko-email">이메일</label>
                         <input type="email" id="ko-email" required>
@@ -723,26 +712,12 @@ with AI voice agents indistinguishable from humans.</p>
         <footer>
             <p>&copy; 2025 BusyBee AI Technologies. All rights reserved.</p>
             <div style="text-align: center; margin-top: 20px;">
-                <button onclick="downloadHTML()" class="cta-button">HTML 파일 다운로드</button>
+                <!-- 다운로드 버튼은 삭제되었습니다 -->
             </div>
         </footer>
     </div>
 
     <script>
-        // HTML 다운로드 함수
-        function downloadHTML() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], {type: 'text/html'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'busybee-website.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-        
         // 전역 변수 및 함수 정의
         let currentLanguage = 'ko';
         
@@ -970,6 +945,28 @@ with AI voice agents indistinguishable from humans.</p>
                 switchLanguage('en');
             }
             
+            // 모달 닫기 버튼 이벤트 핸들러 추가
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            closeModalButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // 부모 요소인 모달 찾기
+                    const modal = button.closest('.modal');
+                    if (modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+            
+            // 모달 외부 클릭 시 닫기 기능 추가
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+            
             // 버튼 요소 가져오기
             const koMeetingBtn = document.getElementById('ko-meeting-btn');
             const enMeetingBtn = document.getElementById('en-meeting-btn');
@@ -979,6 +976,8 @@ with AI voice agents indistinguishable from humans.</p>
             const enCallCenterBtn = document.getElementById('en-callcenter-btn');
             const koRestaurantBtn = document.getElementById('ko-restaurant-btn');
             const enRestaurantBtn = document.getElementById('en-restaurant-btn');
+            const koHotelBtn = document.getElementById('ko-hotel-btn');
+            const enHotelBtn = document.getElementById('en-hotel-btn');
             
             // 미팅 버튼 이벤트 핸들러
             if (koMeetingBtn) {
@@ -1025,7 +1024,7 @@ with AI voice agents indistinguishable from humans.</p>
                 });
             }
             
-            // 레스토랑 예약 버튼 이벤트 핸들러
+            // 레스토랑 예약 버튼 이벤트 핸들러 (한국어)
             if (koRestaurantBtn) {
                 koRestaurantBtn.addEventListener('click', function(e) {
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
@@ -1037,6 +1036,7 @@ with AI voice agents indistinguishable from humans.</p>
                 });
             }
             
+            // 레스토랑 예약 버튼 이벤트 핸들러 (영어)
             if (enRestaurantBtn) {
                 enRestaurantBtn.addEventListener('click', function(e) {
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
@@ -1048,26 +1048,29 @@ with AI voice agents indistinguishable from humans.</p>
                 });
             }
             
-            // 닫기 버튼 이벤트 핸들러
-            const closeButtons = document.querySelectorAll('.close-modal');
-            closeButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const modal = this.closest('.modal');
-                    if (modal) {
-                        modal.classList.remove('active');
+            // 호텔 예약 버튼 이벤트 핸들러 (한국어)
+            if (koHotelBtn) {
+                koHotelBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('모바일 기기를 사용하여 전화번호 +1-470-554-7801로 전화해보세요. AI 에이전트가 실제 호텔 예약을 받는 것을 경험할 수 있습니다.');
+                        e.preventDefault();
+                    } else if(!confirm('전화번호 +1-470-554-7801로 연결됩니다. AI 에이전트가 실제 호텔 예약을 받는 것을 경험해보세요.')) {
+                        e.preventDefault();
                     }
                 });
-            });
+            }
             
-            // 모달 외부 클릭 이벤트 핸들러
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(function(modal) {
-                modal.addEventListener('click', function(event) {
-                    if (event.target === this) {
-                        this.classList.remove('active');
+            // 호텔 예약 버튼 이벤트 핸들러 (영어)
+            if (enHotelBtn) {
+                enHotelBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('Please use a mobile device to call or dial +1-470-554-7801 to experience our AI agent taking hotel reservations.');
+                        e.preventDefault();
+                    } else if(!confirm('You will be connected to +1-470-554-7801. Experience our AI agent taking a real hotel reservation.')) {
+                        e.preventDefault();
                     }
                 });
-            });
+            }
             
             // 미팅 폼 제출 이벤트 핸들러
             const koMeetingForm = document.getElementById('ko-meeting-form');
@@ -1147,4 +1150,8 @@ with AI voice agents indistinguishable from humans.</p>
         });
     </script>
 </body>
-</html>
+</html>">
+                        <label for="ko-name">이름</label>
+                        <input type="text" id="ko-name" required>
+                    </div>
+                    <div class="form-group
