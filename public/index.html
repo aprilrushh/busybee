@@ -13,28 +13,18 @@
                         <input type="email" id="en-email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="en-date">Preferred Date & Time</label>
-                        <input type="datetime-local" id="en-date" name="preferred_date" required>
+                        <label for="en-whatsapp">WhatsApp ID (Optional)</label>
+                        <input type="text" id="en-whatsapp" name="whatsapp" placeholder="e.g. 821021883345">
                     </div>
                     <div class="form-group">
-                        <label for="en-timezone">Timezone</label>
-                        <select id="en-timezone" name="timezone" required>
-                            <option value="America/New_York">US Eastern (EST)</option>
-                            <option value="America/Los_Angeles">US Pacific (PST)</option>
-                            <option value="Europe/London">UK (GMT)</option>
-                            <option value="Asia/Seoul">Korea (KST)</option>
-                            <option value="Asia/Tokyo">Japan (JST)</option>
-                            <option value="Asia/Shanghai">China (CST)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="en-message">Please briefly describe what you'd like to discuss</label>
+                        <label for="en-message">Leave a message</label>
                         <textarea id="en-message" name="message" rows="3" required></textarea>
                     </div>
                     <!-- 숨겨진 필드 추가 -->
                     <input type="hidden" name="_cc" id="en-cc-email">
                     <input type="hidden" name="_subject" value="BusyBee Meeting Request">
-                    <input type="hidden" name="_replyto" value="info@umparumpa.com">
+                    <!-- WhatsApp으로 메시지 받기 위한 필드 -->
+                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=New%20meeting%20request%20received%20from%20the%20website.">
                     <button type="submit" class="submit-button">Confirm</button>
                 </form>
             </div>
@@ -380,19 +370,9 @@
             }
             
             // AI 채팅 버튼 이벤트 핸들러
-            if (koAiChatBtn) {
-                koAiChatBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openModal('ko-ai-chat-modal');
-                });
-            }
+            // WhatsApp 링크로 대체되어 이벤트 핸들러가 필요 없음
             
-            if (enAiChatBtn) {
-                enAiChatBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openModal('en-ai-chat-modal');
-                });
-            }
+            // WhatsApp 링크로 대체되어 이벤트 핸들러가 필요 없음
             
             // 콜센터 버튼 이벤트 핸들러
             if (koCallCenterBtn) {
@@ -459,40 +439,50 @@
             
             // 미팅 폼 제출 이벤트 핸들러
             const koMeetingForm = document.getElementById('ko-meeting-form');
-            if (koMeetingForm) {
-                koMeetingForm.addEventListener('submit', function(e) {
-                    // 사용자 이메일을 CC 필드에 복사
-                    document.getElementById('ko-cc-email').value = document.getElementById('ko-email').value;
-                    
-                    // 폼이 유효한지 확인
-                    if (this.checkValidity()) {
-                        // 알림은 제출 후 표시 (약간의 지연 추가)
-                        setTimeout(function() {
-                            alert('이메일로 미팅확정이 전달되었습니다.');
-                            koMeetingForm.reset();
-                            closeModal('ko-meeting-modal');
-                        }, 1000);
-                    }
-                });
-            }
+                if (koMeetingForm) {
+                    koMeetingForm.addEventListener('submit', function(e) {
+                        // 사용자 이메일을 CC 필드에 복사
+                        document.getElementById('ko-cc-email').value = document.getElementById('ko-email').value;
+                        
+                        // 폼이 유효한지 확인
+                        if (this.checkValidity()) {
+                            // WhatsApp 메시지 준비
+                            const name = document.getElementById('ko-name').value;
+                            const email = document.getElementById('ko-email').value;
+                            const message = document.getElementById('ko-message').value;
+                            const whatsappMsg = `미팅 요청: ${name} (${email}): ${message}`;
+                            
+                            // 폼 제출 후 WhatsApp으로 알림 전송
+                            setTimeout(function() {
+                                alert('미팅 요청이 전송되었습니다. WhatsApp으로 연결됩니다.');
+                                // formspree가 처리 후 WhatsApp으로 리디렉션
+                            }, 1000);
+                        }
+                    });
+                }
             
             const enMeetingForm = document.getElementById('en-meeting-form');
-            if (enMeetingForm) {
-                enMeetingForm.addEventListener('submit', function(e) {
-                    // 사용자 이메일을 CC 필드에 복사
-                    document.getElementById('en-cc-email').value = document.getElementById('en-email').value;
-                    
-                    // 폼이 유효한지 확인
-                    if (this.checkValidity()) {
-                        // 알림은 제출 후 표시 (약간의 지연 추가)
-                        setTimeout(function() {
-                            alert('The meeting confirmation has been sent to your email.');
-                            enMeetingForm.reset();
-                            closeModal('en-meeting-modal');
-                        }, 1000);
-                    }
-                });
-            }
+                if (enMeetingForm) {
+                    enMeetingForm.addEventListener('submit', function(e) {
+                        // 사용자 이메일을 CC 필드에 복사
+                        document.getElementById('en-cc-email').value = document.getElementById('en-email').value;
+                        
+                        // 폼이 유효한지 확인
+                        if (this.checkValidity()) {
+                            // WhatsApp 메시지 준비
+                            const name = document.getElementById('en-name').value;
+                            const email = document.getElementById('en-email').value;
+                            const message = document.getElementById('en-message').value;
+                            const whatsappMsg = `New meeting request from ${name} (${email}): ${message}`;
+                            
+                            // 폼 제출 후 WhatsApp으로 알림 전송
+                            setTimeout(function() {
+                                alert('The meeting request has been sent. You will be redirected to WhatsApp.');
+                                // formspree가 처리 후 WhatsApp으로 리디렉션
+                            }, 1000);
+                        }
+                    });
+                }
             
             // 채팅 전송 이벤트 핸들러
             const koChatSend = document.getElementById('ko-chat-send');
@@ -938,7 +928,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
                     </svg>
                 </div>
-                <button class="ai-button" id="ko-ai-chat-btn">AI Agent Lily와 상담하기</button>
+                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="ko-manager-chat-btn">매니저 Lily와 상담하기</a>
             </div>
 
             <div class="section">
@@ -1051,7 +1041,7 @@ with AI voice agents indistinguishable from humans.</p>
                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
                     </svg>
                 </div>
-                <button class="ai-button" id="en-ai-chat-btn">Chat with AI Agent Lily</button>
+                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="en-manager-chat-btn">Chat with Manager Lily</a>
             </div>
 
             <div class="section">
@@ -1153,28 +1143,18 @@ with AI voice agents indistinguishable from humans.</p>
                         <input type="email" id="ko-email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="ko-date">희망 날짜 및 시간</label>
-                        <input type="datetime-local" id="ko-date" name="preferred_date" required>
+                        <label for="ko-whatsapp">WhatsApp ID (선택사항)</label>
+                        <input type="text" id="ko-whatsapp" name="whatsapp" placeholder="예: 821021883345">
                     </div>
                     <div class="form-group">
-                        <label for="ko-timezone">시간대</label>
-                        <select id="ko-timezone" name="timezone" required>
-                            <option value="Asia/Seoul">한국 (KST)</option>
-                            <option value="America/New_York">미국 동부 (EST)</option>
-                            <option value="America/Los_Angeles">미국 서부 (PST)</option>
-                            <option value="Europe/London">영국 (GMT)</option>
-                            <option value="Asia/Tokyo">일본 (JST)</option>
-                            <option value="Asia/Shanghai">중국 (CST)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ko-message">대화하고 싶은 내용을 간략히 적어주세요</label>
+                        <label for="ko-message">메시지 남기기</label>
                         <textarea id="ko-message" name="message" rows="3" required></textarea>
                     </div>
                     <!-- 숨겨진 필드 추가 -->
                     <input type="hidden" name="_cc" id="ko-cc-email">
                     <input type="hidden" name="_subject" value="BusyBee 미팅 예약 요청">
-                    <input type="hidden" name="_replyto" value="info@umparumpa.com">
+                    <!-- WhatsApp으로 메시지 받기 위한 필드 -->
+                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=웹사이트에서%20새로운%20미팅%20요청이%20접수되었습니다.">
                     <button type="submit" class="submit-button">확인</button>
                 </form>
             </div>
