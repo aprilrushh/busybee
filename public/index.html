@@ -480,7 +480,21 @@
 AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             </div>
 
-            <!-- Primary CTA Section for Google Ads -->
+            <!-- Video Section for YouTube Ad Traffic -->
+            <div class="video-section" style="text-align: center; padding: 40px 0; background: #f8f9fa; margin: 40px 0; border-radius: 15px;">
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">🎥 BusyBee 실제 작동 모습을 확인하세요!</h2>
+                <div style="max-width: 800px; margin: 0 auto; position: relative; padding-bottom: 45%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <iframe src="https://www.youtube.com/embed/1OvZj3Wbhu4" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.1em; color: #495057;">
+                    ⬆️ 실제 AI 에이전트가 전화를 받는 모습을 직접 확인해보세요
+                </p>
+                <a href="#" class="primary-cta" id="video-cta-btn" style="margin-top: 20px;">영상을 본 후 무료 상담 받기</a>
+            </div>
             <div class="cta-section">
                 <h2>🚀 지금 바로 시작하세요!</h2>
                 <p><strong>무료 상담으로</strong> 귀하의 비즈니스에 맞는 <strong>완벽한 AI 솔루션</strong>을 제안해드립니다</p>
@@ -591,7 +605,21 @@ Revolutionize customer experience<br>
 with AI voice agents indistinguishable from humans.</p>
             </div>
 
-            <!-- Primary CTA Section for Google Ads -->
+            <!-- Video Section for YouTube Ad Traffic (English) -->
+            <div class="video-section" style="text-align: center; padding: 40px 0; background: #f8f9fa; margin: 40px 0; border-radius: 15px;">
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">🎥 See BusyBee AI in Action!</h2>
+                <div style="max-width: 800px; margin: 0 auto; position: relative; padding-bottom: 45%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <iframe src="https://www.youtube.com/embed/1OvZj3Wbhu4" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.1em; color: #495057;">
+                    ⬆️ Watch our AI agent handle real customer calls
+                </p>
+                <a href="#" class="primary-cta" id="video-cta-btn-en" style="margin-top: 20px;">Get Free Consultation After Watching</a>
+            </div>
             <div class="cta-section">
                 <h2>🚀 Get Started Today!</h2>
                 <p><strong>Free consultation</strong> to design the <strong>perfect AI solution</strong> for your business</p>
@@ -697,7 +725,7 @@ with AI voice agents indistinguishable from humans.</p>
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h3 class="modal-title">무료 상담 예약하기</h3>
-                <form id="ko-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
+                <form id="ko-meeting-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label for="ko-name">이름 *</label>
                         <input type="text" id="ko-name" name="name" required>
@@ -738,7 +766,7 @@ with AI voice agents indistinguishable from humans.</p>
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h3 class="modal-title">Book Free Consultation</h3>
-                <form id="en-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
+                <form id="en-meeting-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label for="en-name">Name *</label>
                         <input type="text" id="en-name" name="name" required>
@@ -1060,7 +1088,23 @@ with AI voice agents indistinguishable from humans.</p>
                 });
             }
             
-            // 미팅 폼 제출 이벤트 핸들러
+            // Video CTA button handlers
+            const videoCta = document.getElementById('video-cta-btn');
+            const videoCtaEn = document.getElementById('video-cta-btn-en');
+            
+            if (videoCta) {
+                videoCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('ko-meeting-modal');
+                });
+            }
+            
+            if (videoCtaEn) {
+                videoCtaEn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('en-meeting-modal');
+                });
+            }
             const koMeetingForm = document.getElementById('ko-meeting-form');
             if (koMeetingForm) {
                 koMeetingForm.addEventListener('submit', function(e) {
