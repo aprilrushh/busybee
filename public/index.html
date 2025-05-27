@@ -1,549 +1,4 @@
-        <!-- 미팅 예약 모달 (영어) -->
-        <div id="en-meeting-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3 class="modal-title">Book a Meeting</h3>
-                <form id="en-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
-                    <div class="form-group">
-                        <label for="en-name">Name</label>
-                        <input type="text" id="en-name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="en-email">Email</label>
-                        <input type="email" id="en-email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="en-whatsapp">WhatsApp ID (Optional)</label>
-                        <input type="text" id="en-whatsapp" name="whatsapp" placeholder="e.g. 821021883345">
-                    </div>
-                    <div class="form-group">
-                        <label for="en-message">Leave a message</label>
-                        <textarea id="en-message" name="message" rows="3" required></textarea>
-                    </div>
-                    <!-- 숨겨진 필드 추가 -->
-                    <input type="hidden" name="_cc" id="en-cc-email">
-                    <input type="hidden" name="_subject" value="BusyBee Meeting Request">
-                    <!-- WhatsApp으로 메시지 받기 위한 필드 -->
-                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=New%20meeting%20request%20received%20from%20the%20website.">
-                    <button type="submit" class="submit-button">Confirm</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- AI 채팅 모달 (한국어) -->
-        <div id="ko-ai-chat-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3 class="modal-title">AI Agent Lily와 상담하기</h3>
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="width: 80px; height: 80px; margin: 0 auto; background-color: #e3f2fd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
-                        </svg>
-                    </div>
-                    <p style="margin-top: 10px; font-weight: 500;">안녕하세요! BusyBee AI 상담사 Lily입니다.<br>무엇을 도와드릴까요?</p>
-                </div>
-                <div id="ko-chat-messages" style="height: 250px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 15px; overflow-y: auto; background-color: #f9f9f9;">
-                    <div style="margin-bottom: 10px;">
-                        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 10px; display: inline-block; max-width: 80%;">
-                            안녕하세요! BusyBee AI 콜센터 솔루션에 관심을 가져주셔서 감사합니다. 어떤 정보가 필요하신가요?
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" id="ko-chat-input" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="메시지를 입력하세요...">
-                    <button id="ko-chat-send" class="ai-button" style="padding: 10px 15px;">전송</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI 채팅 모달 (영어) -->
-        <div id="en-ai-chat-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3 class="modal-title">Chat with AI Agent Lily</h3>
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="width: 80px; height: 80px; margin: 0 auto; background-color: #e3f2fd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
-                        </svg>
-                    </div>
-                    <p style="margin-top: 10px; font-weight: 500;">Hello! I'm Lily, your BusyBee AI consultant.<br>How may I help you today?</p>
-                </div>
-                <div id="en-chat-messages" style="height: 250px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 15px; overflow-y: auto; background-color: #f9f9f9;">
-                    <div style="margin-bottom: 10px;">
-                        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 10px; display: inline-block; max-width: 80%;">
-                            Hi there! Thank you for your interest in BusyBee AI call center solution. What information would you like to know?
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" id="en-chat-input" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Type your message...">
-                    <button id="en-chat-send" class="ai-button" style="padding: 10px 15px;">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 BusyBee AI Technologies. All rights reserved.</p>
-            <div style="text-align: center; margin-top: 20px;">
-                <!-- 다운로드 버튼은 삭제되었습니다 -->
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // 전역 변수 및 함수 정의
-        let currentLanguage = 'ko';
-        
-        // 언어 전환 함수
-        function switchLanguage(lang) {
-            const koContent = document.getElementById('ko-content');
-            const enContent = document.getElementById('en-content');
-            const krFlag = document.getElementById('kr-flag');
-            const usFlag = document.getElementById('us-flag');
-            
-            currentLanguage = lang;
-            
-            if (lang === 'ko') {
-                koContent.classList.remove('hidden');
-                enContent.classList.add('hidden');
-                krFlag.classList.add('active-flag');
-                usFlag.classList.remove('active-flag');
-                document.documentElement.lang = 'ko';
-            } else {
-                koContent.classList.add('hidden');
-                enContent.classList.remove('hidden');
-                krFlag.classList.remove('active-flag');
-                usFlag.classList.add('active-flag');
-                document.documentElement.lang = 'en';
-            }
-        }
-        
-        // 모달 열기 함수
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-            }
-        }
-        
-        // 모달 닫기 함수
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-            }
-        }
-        
-        // 콜센터 모달 생성 함수
-        function createCallCenterModal(lang) {
-            // 모달 요소 생성
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.style.position = 'fixed';
-            modal.style.left = '0';
-            modal.style.top = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '1000';
-            
-            // 모달 내용
-            const modalContent = document.createElement('div');
-            modalContent.style.backgroundColor = 'white';
-            modalContent.style.padding = '30px';
-            modalContent.style.borderRadius = '10px';
-            modalContent.style.maxWidth = '500px';
-            modalContent.style.width = '90%';
-            modalContent.style.textAlign = 'center';
-            modalContent.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
-            modalContent.style.position = 'relative';
-            
-            // 제목
-            const heading = document.createElement('h3');
-            heading.style.color = '#f39c12';
-            heading.style.marginTop = '0';
-            
-            // 텍스트
-            const text = document.createElement('p');
-            text.style.margin = '20px 0';
-            
-            // 버튼
-            const button = document.createElement('button');
-            button.style.backgroundColor = '#2ecc71';
-            button.style.color = 'white';
-            button.style.border = 'none';
-            button.style.padding = '12px 24px';
-            button.style.borderRadius = '30px';
-            button.style.cursor = 'pointer';
-            button.style.fontWeight = 'bold';
-            button.style.marginTop = '10px';
-            button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
-            button.style.transition = 'all 0.3s';
-            
-            // 닫기 버튼
-            const closeButton = document.createElement('span');
-            closeButton.innerHTML = '&times;';
-            closeButton.style.position = 'absolute';
-            closeButton.style.top = '10px';
-            closeButton.style.right = '20px';
-            closeButton.style.fontSize = '30px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.style.color = '#999';
-            
-            // 언어별 텍스트 설정
-            if (lang === 'ko') {
-                heading.textContent = '콜센터 무인화 서비스';
-                text.textContent = '은행, 보험사, 항공사, 인바운드콜, 아웃바운드 콜등 콜센터의 무인화 서비스를 제공합니다.';
-                button.textContent = '나의 맞춤 서비스 요청하기';
-                
-                button.addEventListener('click', function() {
-                    alert('맞춤 서비스 요청이 접수되었습니다.');
-                    document.body.removeChild(modal);
-                });
-            } else {
-                heading.textContent = 'Unmanned Call Center Services';
-                text.textContent = 'We provide unmanned call center services for banks, insurance companies, airlines, inbound calls, outbound calls, and more.';
-                button.textContent = 'Request Customized Service';
-                
-                button.addEventListener('click', function() {
-                    alert('Your customized service request has been received.');
-                    document.body.removeChild(modal);
-                });
-            }
-            
-            // 호버 효과
-            button.addEventListener('mouseover', function() {
-                button.style.backgroundColor = '#27ae60';
-                button.style.transform = 'translateY(-2px)';
-                button.style.boxShadow = '0 5px 10px rgba(0,0,0,0.15)';
-            });
-            
-            button.addEventListener('mouseout', function() {
-                button.style.backgroundColor = '#2ecc71';
-                button.style.transform = 'translateY(0)';
-                button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
-            });
-            
-            // 닫기 버튼 이벤트
-            closeButton.addEventListener('click', function() {
-                document.body.removeChild(modal);
-            });
-            
-            // 모달 외부 클릭 시 닫기
-            modal.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    document.body.removeChild(modal);
-                }
-            });
-            
-            // 요소들 추가
-            modalContent.appendChild(heading);
-            modalContent.appendChild(text);
-            modalContent.appendChild(button);
-            modalContent.appendChild(closeButton);
-            
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-        }
-        
-        // 채팅 메시지 추가 함수
-        function addChatMessage(containerId, message, isUser = false) {
-            const chatContainer = document.getElementById(containerId);
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.style.marginBottom = '10px';
-            
-            if (isUser) {
-                messageDiv.style.textAlign = 'right';
-            }
-            
-            const messageBubble = document.createElement('div');
-            messageBubble.style.padding = '10px';
-            messageBubble.style.borderRadius = '10px';
-            messageBubble.style.display = 'inline-block';
-            messageBubble.style.maxWidth = '80%';
-            messageBubble.textContent = message;
-            
-            if (isUser) {
-                messageBubble.style.backgroundColor = '#f1f0f0';
-            } else {
-                messageBubble.style.backgroundColor = '#e3f2fd';
-            }
-            
-            messageDiv.appendChild(messageBubble);
-            chatContainer.appendChild(messageDiv);
-            
-            // 스크롤을 맨 아래로
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        
-        // AI 응답 생성 함수
-        function generateAIResponse(message, lang) {
-            const lowerMessage = message.toLowerCase();
-            let response = '';
-            
-            if (lang === 'ko') {
-                if (lowerMessage.includes('가격') || lowerMessage.includes('비용') || lowerMessage.includes('요금')) {
-                    response = '저희 BusyBee의 가격은 규모와 필요한 기능에 따라 맞춤형으로 제공됩니다. 자세한 견적을 원하시면 미팅 예약을 통해 상담해 드리겠습니다.';
-                } else if (lowerMessage.includes('데모') || lowerMessage.includes('시연')) {
-                    response = '데모는 웹사이트 상단의 "레스토랑 예약 시연" 버튼을 통해 체험해보실 수 있습니다. 전화를 통해 실제 AI 에이전트와 대화하실 수 있습니다.';
-                } else if (lowerMessage.includes('설치') || lowerMessage.includes('도입')) {
-                    response = 'BusyBee 도입은 간단합니다. 미팅 예약을 통해 상담을 받으시면 귀사의 환경에 맞는 최적의 솔루션을 제안해 드립니다.';
-                } else {
-                    response = '감사합니다. 더 자세한 정보를 원하시면 미팅 예약을 통해 전문 상담사와 상담하실 수 있습니다. 다른 질문이 있으신가요?';
-                }
-            } else {
-                if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
-                    response = 'Our BusyBee pricing is customized based on your scale and required features. For a detailed quote, please book a meeting with our team.';
-                } else if (lowerMessage.includes('demo') || lowerMessage.includes('try')) {
-                    response = 'You can experience our demo through the "Try Restaurant Reservation" button at the top of the website. This allows you to have a real conversation with our AI agent via phone.';
-                } else if (lowerMessage.includes('install') || lowerMessage.includes('implement')) {
-                    response = 'Implementing BusyBee is simple. Book a meeting for a consultation, and we\'ll propose the optimal solution for your environment.';
-                } else {
-                    response = 'Thank you for your interest. For more detailed information, you can consult with our specialists by booking a meeting. Do you have any other questions?';
-                }
-            }
-            
-            return response;
-        }
-        
-        // 문서 로드 완료 후 이벤트 핸들러 등록
-        document.addEventListener('DOMContentLoaded', function() {
-            // 브라우저 언어 감지
-            const userLang = navigator.language || navigator.userLanguage;
-            if (!userLang.startsWith('ko')) {
-                switchLanguage('en');
-            }
-            
-            // 모달 닫기 버튼 이벤트 핸들러 추가
-            const closeModalButtons = document.querySelectorAll('.close-modal');
-            closeModalButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    // 부모 요소인 모달 찾기
-                    const modal = button.closest('.modal');
-                    if (modal) {
-                        modal.classList.remove('active');
-                    }
-                });
-            });
-            
-            // 모달 외부 클릭 시 닫기 기능 추가
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(function(modal) {
-                modal.addEventListener('click', function(event) {
-                    if (event.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
-            });
-            
-            // 버튼 요소 가져오기
-            const koMeetingBtn = document.getElementById('ko-meeting-btn');
-            const enMeetingBtn = document.getElementById('en-meeting-btn');
-            const koAiChatBtn = document.getElementById('ko-ai-chat-btn');
-            const enAiChatBtn = document.getElementById('en-ai-chat-btn');
-            const koCallCenterBtn = document.getElementById('ko-callcenter-btn');
-            const enCallCenterBtn = document.getElementById('en-callcenter-btn');
-            const koRestaurantBtn = document.getElementById('ko-restaurant-btn');
-            const enRestaurantBtn = document.getElementById('en-restaurant-btn');
-            const koHotelBtn = document.getElementById('ko-hotel-btn');
-            const enHotelBtn = document.getElementById('en-hotel-btn');
-            
-            // 미팅 버튼 이벤트 핸들러
-            if (koMeetingBtn) {
-                koMeetingBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openModal('ko-meeting-modal');
-                });
-            }
-            
-            if (enMeetingBtn) {
-                enMeetingBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openModal('en-meeting-modal');
-                });
-            }
-            
-            // AI 채팅 버튼 이벤트 핸들러
-            // WhatsApp 링크로 대체되어 이벤트 핸들러가 필요 없음
-            
-            // WhatsApp 링크로 대체되어 이벤트 핸들러가 필요 없음
-            
-            // 콜센터 버튼 이벤트 핸들러
-            if (koCallCenterBtn) {
-                koCallCenterBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    createCallCenterModal('ko');
-                });
-            }
-            
-            if (enCallCenterBtn) {
-                enCallCenterBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    createCallCenterModal('en');
-                });
-            }
-            
-            // 레스토랑 예약 버튼 이벤트 핸들러 (한국어)
-            if (koRestaurantBtn) {
-                koRestaurantBtn.addEventListener('click', function(e) {
-                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-                        alert('모바일 기기를 사용하여 전화번호 804-365-7801로 전화해보세요. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험할 수 있습니다.');
-                        e.preventDefault();
-                    } else if(!confirm('전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.')) {
-                        e.preventDefault();
-                    }
-                });
-            }
-            
-            // 레스토랑 예약 버튼 이벤트 핸들러 (영어)
-            if (enRestaurantBtn) {
-                enRestaurantBtn.addEventListener('click', function(e) {
-                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-                        alert('Please use a mobile device to call or dial USA 804-365-7801 to experience our AI agent taking restaurant reservations.');
-                        e.preventDefault();
-                    } else if(!confirm('You will be connected to USA 804-365-7801. Experience our AI agent taking a real restaurant reservation.')) {
-                        e.preventDefault();
-                    }
-                });
-            }
-            
-            // 호텔 예약 버튼 이벤트 핸들러 (한국어)
-            if (koHotelBtn) {
-                koHotelBtn.addEventListener('click', function(e) {
-                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-                        alert('모바일 기기를 사용하여 전화번호 +1-470-554-7801로 전화해보세요. AI 에이전트가 실제 호텔 예약을 받는 것을 경험할 수 있습니다.');
-                        e.preventDefault();
-                    } else if(!confirm('전화번호 +1-470-554-7801로 연결됩니다. AI 에이전트가 실제 호텔 예약을 받는 것을 경험해보세요.')) {
-                        e.preventDefault();
-                    }
-                });
-            }
-            
-            // 호텔 예약 버튼 이벤트 핸들러 (영어)
-            if (enHotelBtn) {
-                enHotelBtn.addEventListener('click', function(e) {
-                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-                        alert('Please use a mobile device to call or dial +1-470-554-7801 to experience our AI agent taking hotel reservations.');
-                        e.preventDefault();
-                    } else if(!confirm('You will be connected to +1-470-554-7801. Experience our AI agent taking a real hotel reservation.')) {
-                        e.preventDefault();
-                    }
-                });
-            }
-            
-            // 미팅 폼 제출 이벤트 핸들러
-            const koMeetingForm = document.getElementById('ko-meeting-form');
-                if (koMeetingForm) {
-                    koMeetingForm.addEventListener('submit', function(e) {
-                        // 사용자 이메일을 CC 필드에 복사
-                        document.getElementById('ko-cc-email').value = document.getElementById('ko-email').value;
-                        
-                        // 폼이 유효한지 확인
-                        if (this.checkValidity()) {
-                            // WhatsApp 메시지 준비
-                            const name = document.getElementById('ko-name').value;
-                            const email = document.getElementById('ko-email').value;
-                            const message = document.getElementById('ko-message').value;
-                            const whatsappMsg = `미팅 요청: ${name} (${email}): ${message}`;
-                            
-                            // 폼 제출 후 WhatsApp으로 알림 전송
-                            setTimeout(function() {
-                                alert('미팅 요청이 전송되었습니다. WhatsApp으로 연결됩니다.');
-                                // formspree가 처리 후 WhatsApp으로 리디렉션
-                            }, 1000);
-                        }
-                    });
-                }
-            
-            const enMeetingForm = document.getElementById('en-meeting-form');
-                if (enMeetingForm) {
-                    enMeetingForm.addEventListener('submit', function(e) {
-                        // 사용자 이메일을 CC 필드에 복사
-                        document.getElementById('en-cc-email').value = document.getElementById('en-email').value;
-                        
-                        // 폼이 유효한지 확인
-                        if (this.checkValidity()) {
-                            // WhatsApp 메시지 준비
-                            const name = document.getElementById('en-name').value;
-                            const email = document.getElementById('en-email').value;
-                            const message = document.getElementById('en-message').value;
-                            const whatsappMsg = `New meeting request from ${name} (${email}): ${message}`;
-                            
-                            // 폼 제출 후 WhatsApp으로 알림 전송
-                            setTimeout(function() {
-                                alert('The meeting request has been sent. You will be redirected to WhatsApp.');
-                                // formspree가 처리 후 WhatsApp으로 리디렉션
-                            }, 1000);
-                        }
-                    });
-                }
-            
-            // 채팅 전송 이벤트 핸들러
-            const koChatSend = document.getElementById('ko-chat-send');
-            const koChatInput = document.getElementById('ko-chat-input');
-            if (koChatSend && koChatInput) {
-                koChatSend.addEventListener('click', function() {
-                    const message = koChatInput.value.trim();
-                    if (message !== '') {
-                        // 사용자 메시지 추가
-                        addChatMessage('ko-chat-messages', message, true);
-                        
-                        // 입력창 초기화
-                        koChatInput.value = '';
-                        
-                        // AI 응답 생성 및 추가 (지연 효과)
-                        setTimeout(function() {
-                            const response = generateAIResponse(message, 'ko');
-                            addChatMessage('ko-chat-messages', response, false);
-                        }, 1000);
-                    }
-                });
-                
-                koChatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        koChatSend.click();
-                        e.preventDefault();
-                    }
-                });
-            }
-            
-            const enChatSend = document.getElementById('en-chat-send');
-            const enChatInput = document.getElementById('en-chat-input');
-            if (enChatSend && enChatInput) {
-                enChatSend.addEventListener('click', function() {
-                    const message = enChatInput.value.trim();
-                    if (message !== '') {
-                        // 사용자 메시지 추가
-                        addChatMessage('en-chat-messages', message, true);
-                        
-                        // 입력창 초기화
-                        enChatInput.value = '';
-                        
-                        // AI 응답 생성 및 추가 (지연 효과)
-                        setTimeout(function() {
-                            const response = generateAIResponse(message, 'en');
-                            addChatMessage('en-chat-messages', response, false);
-                        }, 1000);
-                    }
-                });
-                
-                enChatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        enChatSend.click();
-                        e.preventDefault();
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -584,20 +39,34 @@
             gap: 10px;
         }
         
-        .flag-icon {
-            width: 30px;
-            height: 20px;
+        .flag-button {
+            width: 40px;
+            height: 28px;
             cursor: pointer;
-            border: 1px solid #ddd;
-            transition: transform 0.2s;
+            border: 2px solid #ddd;
+            transition: all 0.2s;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            background: white;
         }
         
-        .flag-icon:hover {
-            transform: scale(1.1);
+        .flag-button svg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .flag-button:hover {
+            transform: scale(1.05);
+            border-color: #f39c12;
         }
         
         .active-flag {
-            box-shadow: 0 0 5px #f39c12;
+            box-shadow: 0 0 8px #f39c12;
+            border-color: #f39c12;
+            background-color: #f39c12;
+            color: white;
         }
         
         h1, h2, h3 {
@@ -623,6 +92,67 @@
             font-size: 1.2em;
             max-width: 800px;
             margin: 0 auto 30px;
+        }
+        
+        /* CTA Button Optimization for Google Ads */
+        .primary-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin: 20px 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .primary-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+        
+        .primary-cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .primary-cta:hover:before {
+            left: 100%;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin: 40px 0;
+            border-radius: 15px;
+            border: 3px solid #28a745;
+        }
+        
+        .cta-section h2 {
+            color: #28a745;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2em;
+            color: #495057;
+            margin-bottom: 25px;
         }
         
         .feature-grid {
@@ -684,14 +214,6 @@
             background-color: #e67e22;
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-        }
-        
-        .cta-button.primary {
-            background-color: #2ecc71;
-        }
-        
-        .cta-button.primary:hover {
-            background-color: #27ae60;
         }
         
         .demo-title {
@@ -810,6 +332,7 @@
             border-radius: 5px;
             font-size: 1em;
             font-family: inherit;
+            box-sizing: border-box;
         }
         
         .form-group textarea {
@@ -874,6 +397,22 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .primary-cta {
+                font-size: 1.1em;
+                padding: 15px 30px;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.8em;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -881,24 +420,53 @@
         <header>
             <div class="logo">BusyBee</div>
             <div class="language-switcher">
-                <svg class="flag-icon active-flag" id="kr-flag" viewBox="0 0 640 480" onclick="switchLanguage('ko')">
-                    <path fill="#fff" d="M0 0h640v480H0z"/>
-                    <g transform="rotate(-56.3 367.2 247.5) scale(9.38)">
-                        <path d="M-6-25H6m-12 4H6m-12 4H6m-12 4H6m-12 4H6m-12 4H6" stroke="#000" stroke-width="2"/>
-                    </g>
-                    <path fill="#c70000" d="M320 240a56 56 0 1 1 0-112 56 56 0 0 0 0 112z"/>
-                    <path d="M320 184a56 56 0 0 1 0 112 56 56 0 0 0 0-112" fill="#0047a0"/>
-                    <path d="M232 296l8-16 16 8zm96 0l-8-16-16 8zm-96-112l8 16 16-8zm96 0l-8 16-16-8z" fill="#c70000"/>
-                </svg>
-                <svg class="flag-icon" id="us-flag" viewBox="0 0 640 480" onclick="switchLanguage('en')">
-                    <path fill="#bd3d44" d="M0 0h640v480H0"/>
-                    <path stroke="#fff" stroke-width="40" d="M0 40h640m0 80H0m0 80h640m0 80H0m0 80h640m0 80H0"/>
-                    <path fill="#192f5d" d="M0 0h320v280H0z"/>
-                    <path fill="#fff" d="M20 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z
-                    m-240 20h10v10H20zm40 0h10v10H60zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10zm40 0h10v10h-10z"/>
-                </svg>
+                <div class="flag-button active-flag" id="kr-flag" onclick="switchLanguage('ko')" title="한국어">
+                    <svg viewBox="0 0 55.7 38.9" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#FEFEFE" stroke="#CCCCCC" stroke-width="0.5" d="M3.28,38.65h49.13c1.67,0,3.03-1.37,3.03-3.03V3.28c0-1.67-1.36-3.03-3.03-3.03H3.28 c-1.67,0-3.03,1.36-3.03,3.03v32.33C0.25,37.29,1.61,38.65,3.28,38.65L3.28,38.65z"/>
+                        <path fill="#252422" d="M12.54,15.01l5.32-7.99L12.54,15.01L12.54,15.01z M10.54,13.68l5.33-7.99L10.54,13.68L10.54,13.68z M8.55,12.35l5.33-7.99L8.55,12.35L8.55,12.35z"/>
+                        <path fill="none" stroke="#252422" stroke-width="1.6" d="M12.54,15.01l5.32-7.99 M10.54,13.68l5.33-7.99 M8.55,12.35l5.33-7.99"/>
+                        <path fill="#252422" d="M41.83,34.54l5.33-7.99L41.83,34.54L41.83,34.54z M39.83,33.21l5.33-7.99L39.83,33.21L39.83,33.21z M37.83,31.88l5.33-7.99L37.83,31.88L37.83,31.88z"/>
+                        <path fill="none" stroke="#252422" stroke-width="1.6" d="M41.83,34.54l5.33-7.99 M39.83,33.21l5.33-7.99 M37.83,31.88l5.33-7.99"/>
+                        <path fill="#C62631" d="M19.86,14.13c2.94-4.41,8.9-5.6,13.31-2.66c4.41,2.94,5.6,8.9,2.66,13.31c-2.94,4.41-8.9,5.6-13.31,2.66 C18.11,24.5,16.92,18.54,19.86,14.13L19.86,14.13z"/>
+                        <path fill="#303C70" d="M19.86,14.13c-1.47,2.21-0.87,5.19,1.33,6.66c2.21,1.47,5.19,0.87,6.66-1.33c1.47-2.21,4.45-2.8,6.66-1.33 c2.21,1.47,2.8,4.45,1.33,6.66c-2.94,4.41-8.9,5.6-13.31,2.66C18.11,24.5,16.92,18.54,19.86,14.13L19.86,14.13z"/>
+                        <path fill="#252422" d="M17.86,31.88l-5.32-7.99L17.86,31.88L17.86,31.88z M15.87,33.21l-5.33-7.99L15.87,33.21L15.87,33.21z M13.87,34.54l-5.33-7.99L13.87,34.54L13.87,34.54z"/>
+                        <path fill="none" stroke="#252422" stroke-width="1.6" d="M17.86,31.88l-5.32-7.99 M15.87,33.21l-5.33-7.99 M13.87,34.54l-5.33-7.99"/>
+                        <path fill="#252422" d="M47.15,12.35l-5.33-7.99L47.15,12.35L47.15,12.35z M45.16,13.68l-5.33-7.99L45.16,13.68L45.16,13.68z M43.16,15.01l-5.33-7.99L43.16,15.01L43.16,15.01z"/>
+                        <path fill="none" stroke="#252422" stroke-width="1.6" d="M47.15,12.35l-5.33-7.99 M45.16,13.68l-5.33-7.99 M43.16,15.01l-5.33-7.99"/>
+                    </svg>
+                </div>
+                <div class="flag-button" id="us-flag" onclick="switchLanguage('en')" title="English">
+                    <svg viewBox="0 0 55.2 38.4" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#B22234" d="M3.03,0h49.13c1.67,0,3.03,1.36,3.03,3.03v32.33c0,1.67-1.36,3.03-3.03,3.03H3.03C1.36,38.4,0,37.04,0,35.37 V3.03C0,1.36,1.36,0,3.03,0L3.03,0z"/>
+                        <path fill="#FFFFFF" d="M0.02,2.73h55.17c0.01,0.1,0.02,0.2,0.02,0.31v2.94H0V3.03C0,2.93,0.01,2.83,0.02,2.73L0.02,2.73z M55.2,8.67 v3.24H0V8.67H55.2L55.2,8.67z M55.2,14.61v3.24H0v-3.24H55.2L55.2,14.61z M55.2,20.55v3.24H0v-3.24H55.2L55.2,20.55z M55.2,26.49 v3.24H0v-3.24H55.2L55.2,26.49z M55.2,32.43v2.93c0,0.1-0.01,0.21-0.02,0.31H0.02C0.01,35.58,0,35.47,0,35.37v-2.93H55.2 L55.2,32.43z"/>
+                        <path fill="#3C3B6E" d="M20.8,0v20.68H0V3.03C0,1.36,1.36,0,3.03,0H20.8L20.8,0L20.8,0z"/>
+                        <polygon fill="#FFFFFF" points="1.23,2.86 1.92,5.01 0.1,3.68 2.36,3.68 0.53,5.01 1.23,2.86"/>
+                        <polygon fill="#FFFFFF" points="1.23,7.02 1.92,9.17 0.1,7.84 2.36,7.84 0.53,9.17 1.23,7.02"/>
+                        <polygon fill="#FFFFFF" points="1.23,11.18 1.92,13.33 0.1,12 2.36,12 0.53,13.33 1.23,11.18"/>
+                        <polygon fill="#FFFFFF" points="1.23,15.34 1.92,17.49 0.1,16.16 2.36,16.16 0.53,17.49 1.23,15.34"/>
+                        <polygon fill="#FFFFFF" points="3.67,0.78 4.37,2.93 2.54,1.6 4.81,1.6 2.97,2.93 3.67,0.78"/>
+                        <polygon fill="#FFFFFF" points="3.67,4.94 4.37,7.09 2.54,5.76 4.81,5.76 2.97,7.09 3.67,4.94"/>
+                        <polygon fill="#FFFFFF" points="3.67,9.1 4.37,11.25 2.54,9.92 4.81,9.92 2.97,11.25 3.67,9.1"/>
+                        <polygon fill="#FFFFFF" points="3.67,13.26 4.37,15.41 2.54,14.08 4.81,14.08 2.97,15.41 3.67,13.26"/>
+                        <polygon fill="#FFFFFF" points="3.67,17.42 4.37,19.57 2.54,18.24 4.81,18.24 2.97,19.57 3.67,17.42"/>
+                        <polygon fill="#FFFFFF" points="6.12,2.86 6.82,5.01 4.99,3.68 7.25,3.68 5.42,5.01 6.12,2.86"/>
+                        <polygon fill="#FFFFFF" points="6.12,7.02 6.82,9.17 4.99,7.84 7.25,7.84 5.42,9.17 6.12,7.02"/>
+                        <polygon fill="#FFFFFF" points="6.12,11.18 6.82,13.33 4.99,12 7.25,12 5.42,13.33 6.12,11.18"/>
+                        <polygon fill="#FFFFFF" points="6.12,15.34 6.82,17.49 4.99,16.16 7.25,16.16 5.42,17.49 6.12,15.34"/>
+                        <polygon fill="#FFFFFF" points="8.57,0.78 9.26,2.93 7.44,1.6 9.7,1.6 7.87,2.93 8.57,0.78"/>
+                        <polygon fill="#FFFFFF" points="8.57,4.94 9.26,7.09 7.44,5.76 9.7,5.76 7.87,7.09 8.57,4.94"/>
+                        <polygon fill="#FFFFFF" points="8.57,9.1 9.26,11.25 7.44,9.92 9.7,9.92 7.87,11.25 8.57,9.1"/>
+                        <polygon fill="#FFFFFF" points="8.57,13.26 9.26,15.41 7.44,14.08 9.7,14.08 7.87,15.41 8.57,13.26"/>
+                        <polygon fill="#FFFFFF" points="11.01,2.86 11.71,5.01 9.88,3.68 12.14,3.68 10.31,5.01 11.01,2.86"/>
+                        <polygon fill="#FFFFFF" points="11.01,7.02 11.71,9.17 9.88,7.84 12.14,7.84 10.31,9.17 11.01,7.02"/>
+                        <polygon fill="#FFFFFF" points="11.01,11.18 11.71,13.33 9.88,12 12.14,12 10.31,13.33 11.01,11.18"/>
+                        <polygon fill="#FFFFFF" points="13.46,0.78 14.16,2.93 12.33,1.6 14.59,1.6 12.76,2.93 13.46,0.78"/>
+                        <polygon fill="#FFFFFF" points="13.46,4.94 14.16,7.09 12.33,5.76 14.59,5.76 12.76,7.09 13.46,4.94"/>
+                        <polygon fill="#FFFFFF" points="15.9,2.86 16.6,5.01 14.77,3.68 17.03,3.68 15.21,5.01 15.9,2.86"/>
+                        <polygon fill="#FFFFFF" points="18.35,0.78 19.05,2.93 17.22,1.6 19.48,1.6 17.65,2.93 18.35,0.78"/>
+                        <polygon fill="#FFFFFF" points="18.35,4.94 19.05,7.09 17.22,5.76 19.48,5.76 17.65,7.09 18.35,4.94"/>
+                    </svg>
+                </div>
             </div>
         </header>
 
@@ -912,13 +480,22 @@
 AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             </div>
 
-            <h2 class="demo-title">Demo</h2>
+            <!-- Primary CTA Section for Google Ads -->
+            <div class="cta-section">
+                <h2>🚀 지금 바로 시작하세요!</h2>
+                <p><strong>무료 상담으로</strong> 귀하의 비즈니스에 맞는 <strong>완벽한 AI 솔루션</strong>을 제안해드립니다</p>
+                <a href="#" class="primary-cta" id="ko-main-cta-btn">무료 상담 예약하기</a>
+                <p style="font-size: 0.9em; color: #6c757d; margin-top: 15px;">
+                    ✅ 설치비 무료 &nbsp;&nbsp; ✅ 24시간 지원 &nbsp;&nbsp; ✅ 맞춤형 솔루션
+                </p>
+            </div>
+
+            <h2 class="demo-title">Demo - 직접 체험해보세요</h2>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="ko-restaurant-btn">레스토랑 예약 시연</a>
                 <a href="tel:+14705547801" class="cta-button" id="ko-hotel-btn">호텔 예약 시연</a>
                 <a href="#" class="cta-button">텔레마케팅 시연</a>
                 <a href="#" class="cta-button" id="ko-callcenter-btn">콜센터 예약 시연</a>
-                <a href="#" class="cta-button primary" id="ko-meeting-btn">미팅 예약하기</a>
             </div>
             
             <!-- AI 상담 버튼 추가 -->
@@ -959,29 +536,18 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                         <h3>무제한 동시 통화 처리</h3>
                         <p>피크 시간대에도 통화량에 상관없이 모든 전화 응대</p>
                     </div>
+                    <div class="feature-card">
+                        <h3>비용 절감 효과</h3>
+                        <p>인건비 최대 80% 절감으로 운영 효율성 극대화</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="section">
-                <h2 class="section-title">혁신적인 기술</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>고급 음성 인식 기술</h3>
-                        <p>전화선 압축 환경에서도 뛰어난 정확도를 보이는 음성 인식 기술 적용</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>실시간 응답 생성 엔진</h3>
-                        <p>기존 LLM의 한계를 극복한 독자적인 응답 생성 알고리즘으로 대화 도중에도 자연스러운 응답 생성</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>상황 인식 및 감정</h3>
-                        <p>고객의 감정, 상황을 실시간으로 분석하여 적절한 대응 제공</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>자동 학습 시스템</h3>
-                        <p>매 통화마다 학습하여 지속적으로 서비스 품질 향상</p>
-                    </div>
-                </div>
+            <!-- Another CTA Section -->
+            <div class="cta-section">
+                <h2>💰 비용은 걱정하지 마세요!</h2>
+                <p>설치비 무료, 월 이용료만으로 <strong>프리미엄 AI 콜센터</strong>를 운영하세요</p>
+                <a href="#" class="primary-cta" id="ko-secondary-cta-btn">무료 견적 받기</a>
             </div>
 
             <div class="section">
@@ -1025,13 +591,22 @@ Revolutionize customer experience<br>
 with AI voice agents indistinguishable from humans.</p>
             </div>
 
-            <h2 class="demo-title">Demo</h2>
+            <!-- Primary CTA Section for Google Ads -->
+            <div class="cta-section">
+                <h2>🚀 Get Started Today!</h2>
+                <p><strong>Free consultation</strong> to design the <strong>perfect AI solution</strong> for your business</p>
+                <a href="#" class="primary-cta" id="en-main-cta-btn">Book Free Consultation</a>
+                <p style="font-size: 0.9em; color: #6c757d; margin-top: 15px;">
+                    ✅ Free Setup &nbsp;&nbsp; ✅ 24/7 Support &nbsp;&nbsp; ✅ Custom Solutions
+                </p>
+            </div>
+
+            <h2 class="demo-title">Demo - Try it yourself</h2>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="en-restaurant-btn">Try Restaurant Reservation</a>
                 <a href="tel:+14705547801" class="cta-button" id="en-hotel-btn">Try Hotel Reservation</a>
                 <a href="#" class="cta-button">Try Telemarketing</a>
                 <a href="#" class="cta-button" id="en-callcenter-btn">Try Call Center Services</a>
-                <a href="#" class="cta-button primary" id="en-meeting-btn">Book a Meeting</a>
             </div>
             
             <!-- AI 상담 버튼 추가 (영어) -->
@@ -1072,29 +647,18 @@ with AI voice agents indistinguishable from humans.</p>
                         <h3>Unlimited Simultaneous Call Handling</h3>
                         <p>Handles all calls regardless of call volume, even during peak hours</p>
                     </div>
+                    <div class="feature-card">
+                        <h3>Cost Reduction</h3>
+                        <p>Up to 80% reduction in labor costs maximizing operational efficiency</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="section">
-                <h2 class="section-title">Innovative Technology</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>Advanced Voice Recognition Technology</h3>
-                        <p>Voice recognition technology that works smoothly with compressed voice through phone lines with outstanding accuracy</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Real-time Response Generation Engine</h3>
-                        <p>Proprietary response generation algorithm that overcomes the limitations of existing LLMs, generating natural responses even during conversations</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Situation Awareness and Emotion</h3>
-                        <p>Real-time analysis of customer emotions and situations to provide appropriate responses</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Automatic Learning System</h3>
-                        <p>Learns from every call to continuously improve service quality</p>
-                    </div>
-                </div>
+            <!-- Another CTA Section -->
+            <div class="cta-section">
+                <h2>💰 Don't worry about costs!</h2>
+                <p>Free setup, operate a <strong>premium AI call center</strong> with just monthly fees</p>
+                <a href="#" class="primary-cta" id="en-secondary-cta-btn">Get Free Quote</a>
             </div>
 
             <div class="section">
@@ -1132,33 +696,397 @@ with AI voice agents indistinguishable from humans.</p>
         <div id="ko-meeting-modal" class="modal">
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
-                <h3 class="modal-title">미팅 예약하기</h3>
+                <h3 class="modal-title">무료 상담 예약하기</h3>
                 <form id="ko-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
                     <div class="form-group">
-                        <label for="ko-name">이름</label>
+                        <label for="ko-name">이름 *</label>
                         <input type="text" id="ko-name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="ko-email">이메일</label>
+                        <label for="ko-email">이메일 *</label>
                         <input type="email" id="ko-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ko-company">회사명</label>
+                        <input type="text" id="ko-company" name="company" placeholder="회사명을 입력해주세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="ko-phone">연락처</label>
+                        <input type="tel" id="ko-phone" name="phone" placeholder="010-0000-0000">
                     </div>
                     <div class="form-group">
                         <label for="ko-whatsapp">WhatsApp ID (선택사항)</label>
                         <input type="text" id="ko-whatsapp" name="whatsapp" placeholder="예: 821021883345">
                     </div>
                     <div class="form-group">
-                        <label for="ko-message">메시지 남기기</label>
-                        <textarea id="ko-message" name="message" rows="3" required></textarea>
+                        <label for="ko-message">상담 희망 내용 *</label>
+                        <textarea id="ko-message" name="message" rows="3" required placeholder="어떤 서비스에 관심이 있으신지, 현재 운영 중인 콜센터 규모 등을 알려주세요"></textarea>
                     </div>
                     <!-- 숨겨진 필드 추가 -->
                     <input type="hidden" name="_cc" id="ko-cc-email">
-                    <input type="hidden" name="_subject" value="BusyBee 미팅 예약 요청">
+                    <input type="hidden" name="_subject" value="BusyBee 무료 상담 예약 요청">
+                    <input type="hidden" name="source" value="Google Ads Landing Page">
                     <!-- WhatsApp으로 메시지 받기 위한 필드 -->
-                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=웹사이트에서%20새로운%20미팅%20요청이%20접수되었습니다.">
-                    <button type="submit" class="submit-button">확인</button>
+                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=웹사이트에서%20새로운%20상담%20요청이%20접수되었습니다.">
+                    <button type="submit" class="submit-button">무료 상담 예약하기</button>
                 </form>
             </div>
         </div>
 
         <!-- 미팅 예약 모달 (영어) -->
         <div id="en-meeting-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 class="modal-title">Book Free Consultation</h3>
+                <form id="en-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
+                    <div class="form-group">
+                        <label for="en-name">Name *</label>
+                        <input type="text" id="en-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="en-email">Email *</label>
+                        <input type="email" id="en-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="en-company">Company</label>
+                        <input type="text" id="en-company" name="company" placeholder="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="en-phone">Phone</label>
+                        <input type="tel" id="en-phone" name="phone" placeholder="+1-000-000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="en-whatsapp">WhatsApp ID (Optional)</label>
+                        <input type="text" id="en-whatsapp" name="whatsapp" placeholder="e.g. 821021883345">
+                    </div>
+                    <div class="form-group">
+                        <label for="en-message">Consultation Details *</label>
+                        <textarea id="en-message" name="message" rows="3" required placeholder="Tell us about your interest in our services and current call center scale"></textarea>
+                    </div>
+                    <!-- 숨겨진 필드 추가 -->
+                    <input type="hidden" name="_cc" id="en-cc-email">
+                    <input type="hidden" name="_subject" value="BusyBee Free Consultation Request">
+                    <input type="hidden" name="source" value="Google Ads Landing Page">
+                    <!-- WhatsApp으로 메시지 받기 위한 필드 -->
+                    <input type="hidden" name="_next" value="https://wa.me/821021883345?text=New%20consultation%20request%20received%20from%20the%20website.">
+                    <button type="submit" class="submit-button">Book Free Consultation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer moved to the bottom -->
+    <footer>
+        <p>&copy; 2025 BusyBee AI Technologies. All rights reserved.</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <p>📞 Contact: <a href="https://wa.me/821021883345" style="color: #f39c12;">WhatsApp +82-10-2188-3345</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 전역 변수 및 함수 정의
+        let currentLanguage = 'ko';
+        
+        // 언어 전환 함수
+        function switchLanguage(lang) {
+            const koContent = document.getElementById('ko-content');
+            const enContent = document.getElementById('en-content');
+            const krFlag = document.getElementById('kr-flag');
+            const usFlag = document.getElementById('us-flag');
+            
+            currentLanguage = lang;
+            
+            if (lang === 'ko') {
+                koContent.classList.remove('hidden');
+                enContent.classList.add('hidden');
+                krFlag.classList.add('active-flag');
+                usFlag.classList.remove('active-flag');
+                document.documentElement.lang = 'ko';
+            } else {
+                koContent.classList.add('hidden');
+                enContent.classList.remove('hidden');
+                krFlag.classList.remove('active-flag');
+                usFlag.classList.add('active-flag');
+                document.documentElement.lang = 'en';
+            }
+        }
+        
+        // 모달 열기 함수
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+        
+        // 모달 닫기 함수
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        // 콜센터 모달 생성 함수
+        function createCallCenterModal(lang) {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.style.position = 'fixed';
+            modal.style.left = '0';
+            modal.style.top = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.padding = '30px';
+            modalContent.style.borderRadius = '10px';
+            modalContent.style.maxWidth = '500px';
+            modalContent.style.width = '90%';
+            modalContent.style.textAlign = 'center';
+            modalContent.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+            modalContent.style.position = 'relative';
+            
+            const heading = document.createElement('h3');
+            heading.style.color = '#f39c12';
+            heading.style.marginTop = '0';
+            
+            const text = document.createElement('p');
+            text.style.margin = '20px 0';
+            
+            const button = document.createElement('button');
+            button.style.backgroundColor = '#2ecc71';
+            button.style.color = 'white';
+            button.style.border = 'none';
+            button.style.padding = '12px 24px';
+            button.style.borderRadius = '30px';
+            button.style.cursor = 'pointer';
+            button.style.fontWeight = 'bold';
+            button.style.marginTop = '10px';
+            button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+            button.style.transition = 'all 0.3s';
+            
+            const closeButton = document.createElement('span');
+            closeButton.innerHTML = '&times;';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '20px';
+            closeButton.style.fontSize = '30px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.color = '#999';
+            
+            if (lang === 'ko') {
+                heading.textContent = '콜센터 무인화 서비스';
+                text.textContent = '은행, 보험사, 항공사, 인바운드콜, 아웃바운드 콜등 콜센터의 무인화 서비스를 제공합니다.';
+                button.textContent = '무료 상담 요청하기';
+                
+                button.addEventListener('click', function() {
+                    document.body.removeChild(modal);
+                    openModal('ko-meeting-modal');
+                });
+            } else {
+                heading.textContent = 'Unmanned Call Center Services';
+                text.textContent = 'We provide unmanned call center services for banks, insurance companies, airlines, inbound calls, outbound calls, and more.';
+                button.textContent = 'Request Free Consultation';
+                
+                button.addEventListener('click', function() {
+                    document.body.removeChild(modal);
+                    openModal('en-meeting-modal');
+                });
+            }
+            
+            button.addEventListener('mouseover', function() {
+                button.style.backgroundColor = '#27ae60';
+                button.style.transform = 'translateY(-2px)';
+                button.style.boxShadow = '0 5px 10px rgba(0,0,0,0.15)';
+            });
+            
+            button.addEventListener('mouseout', function() {
+                button.style.backgroundColor = '#2ecc71';
+                button.style.transform = 'translateY(0)';
+                button.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+            });
+            
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+            
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            modalContent.appendChild(heading);
+            modalContent.appendChild(text);
+            modalContent.appendChild(button);
+            modalContent.appendChild(closeButton);
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+        
+        // 문서 로드 완료 후 이벤트 핸들러 등록
+        document.addEventListener('DOMContentLoaded', function() {
+            // 브라우저 언어 감지
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.startsWith('ko')) {
+                switchLanguage('en');
+            }
+            
+            // 모달 닫기 버튼 이벤트 핸들러 추가
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            closeModalButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const modal = button.closest('.modal');
+                    if (modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+            
+            // 모달 외부 클릭 시 닫기 기능 추가
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+            
+            // CTA 버튼들 이벤트 핸들러
+            const koMainCta = document.getElementById('ko-main-cta-btn');
+            const koSecondaryCta = document.getElementById('ko-secondary-cta-btn');
+            const enMainCta = document.getElementById('en-main-cta-btn');
+            const enSecondaryCta = document.getElementById('en-secondary-cta-btn');
+            const koCallCenterBtn = document.getElementById('ko-callcenter-btn');
+            const enCallCenterBtn = document.getElementById('en-callcenter-btn');
+            
+            if (koMainCta) {
+                koMainCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('ko-meeting-modal');
+                });
+            }
+            
+            if (koSecondaryCta) {
+                koSecondaryCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('ko-meeting-modal');
+                });
+            }
+            
+            if (enMainCta) {
+                enMainCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('en-meeting-modal');
+                });
+            }
+            
+            if (enSecondaryCta) {
+                enSecondaryCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal('en-meeting-modal');
+                });
+            }
+            
+            if (koCallCenterBtn) {
+                koCallCenterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    createCallCenterModal('ko');
+                });
+            }
+            
+            if (enCallCenterBtn) {
+                enCallCenterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    createCallCenterModal('en');
+                });
+            }
+            
+            // 레스토랑/호텔 예약 버튼 이벤트 핸들러
+            const koRestaurantBtn = document.getElementById('ko-restaurant-btn');
+            const enRestaurantBtn = document.getElementById('en-restaurant-btn');
+            const koHotelBtn = document.getElementById('ko-hotel-btn');
+            const enHotelBtn = document.getElementById('en-hotel-btn');
+            
+            if (koRestaurantBtn) {
+                koRestaurantBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('모바일 기기를 사용하여 전화번호 804-365-7801로 전화해보세요. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험할 수 있습니다.');
+                        e.preventDefault();
+                    } else if(!confirm('전화번호 804-365-7801로 연결됩니다. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험해보세요.')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            if (enRestaurantBtn) {
+                enRestaurantBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('Please use a mobile device to call or dial USA 804-365-7801 to experience our AI agent taking restaurant reservations.');
+                        e.preventDefault();
+                    } else if(!confirm('You will be connected to USA 804-365-7801. Experience our AI agent taking a real restaurant reservation.')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            if (koHotelBtn) {
+                koHotelBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('모바일 기기를 사용하여 전화번호 +1-470-554-7801로 전화해보세요. AI 에이전트가 실제 호텔 예약을 받는 것을 경험할 수 있습니다.');
+                        e.preventDefault();
+                    } else if(!confirm('전화번호 +1-470-554-7801로 연결됩니다. AI 에이전트가 실제 호텔 예약을 받는 것을 경험해보세요.')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            if (enHotelBtn) {
+                enHotelBtn.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+                        alert('Please use a mobile device to call or dial +1-470-554-7801 to experience our AI agent taking hotel reservations.');
+                        e.preventDefault();
+                    } else if(!confirm('You will be connected to +1-470-554-7801. Experience our AI agent taking a real hotel reservation.')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            // 미팅 폼 제출 이벤트 핸들러
+            const koMeetingForm = document.getElementById('ko-meeting-form');
+            if (koMeetingForm) {
+                koMeetingForm.addEventListener('submit', function(e) {
+                    document.getElementById('ko-cc-email').value = document.getElementById('ko-email').value;
+                    
+                    if (this.checkValidity()) {
+                        setTimeout(function() {
+                            alert('상담 요청이 전송되었습니다. 곧 연락드리겠습니다!');
+                        }, 500);
+                    }
+                });
+            }
+            
+            const enMeetingForm = document.getElementById('en-meeting-form');
+            if (enMeetingForm) {
+                enMeetingForm.addEventListener('submit', function(e) {
+                    document.getElementById('en-cc-email').value = document.getElementById('en-email').value;
+                    
+                    if (this.checkValidity()) {
+                        setTimeout(function() {
+                            alert('Consultation request has been sent. We will contact you soon!');
+                        }, 500);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
