@@ -1,6 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Analytics 4 (GA4) Tracking Code -->
+    <!-- IMPORTANT: Replace 'G-XXXXXXXXXX' with your actual Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNHKFFEYYE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Replace 'G-XXXXXXXXXX' with your actual Measurement ID
+        gtag('config', 'G-YNHKFFEYYE', {
+            // Enhanced security and privacy settings
+            'anonymize_ip': true,                    // Anonymize IP addresses for privacy
+            'allow_google_signals': false,          // Disable Google Signals for better privacy
+            'allow_ad_personalization_signals': false, // Disable ad personalization
+            'cookie_flags': 'secure;samesite=strict', // Secure cookie settings
+            'cookie_expires': 63072000,             // Cookie expiration (2 years in seconds)
+            'send_page_view': true                  // Automatically send page view events
+        });
+        
+        // Custom event tracking functions for BusyBee
+        function trackButtonClick(buttonName, buttonLocation, language) {
+            gtag('event', 'click', {
+                'event_category': 'engagement',
+                'event_label': buttonName,
+                'custom_parameter_location': buttonLocation,
+                'custom_parameter_language': language || 'unknown',
+                'value': 1
+            });
+        }
+        
+        function trackFormSubmission(formType, language) {
+            gtag('event', 'form_submit', {
+                'event_category': 'lead_generation',
+                'event_label': formType,
+                'custom_parameter_language': language || 'unknown',
+                'value': 50  // High value for form submissions
+            });
+        }
+        
+        function trackPhoneClick(phoneNumber, language) {
+            gtag('event', 'phone_click', {
+                'event_category': 'contact',
+                'event_label': phoneNumber,
+                'custom_parameter_language': language || 'unknown',
+                'value': 30  // High value for phone calls
+            });
+        }
+        
+        function trackDemoInteraction(demoType, language) {
+            gtag('event', 'demo_interaction', {
+                'event_category': 'product_engagement',
+                'event_label': demoType,
+                'custom_parameter_language': language || 'unknown',
+                'value': 25
+            });
+        }
+        
+        function trackLanguageSwitch(fromLang, toLang) {
+            gtag('event', 'language_switch', {
+                'event_category': 'user_preference',
+                'event_label': fromLang + '_to_' + toLang,
+                'value': 1
+            });
+        }
+        
+        function trackVideoInteraction(action, videoTitle, language) {
+            gtag('event', action, {
+                'event_category': 'video',
+                'event_label': videoTitle,
+                'custom_parameter_language': language || 'unknown',
+                'value': 15
+            });
+        }
+        
+        function trackWhatsAppClick(language) {
+            gtag('event', 'whatsapp_click', {
+                'event_category': 'contact',
+                'event_label': 'manager_chat',
+                'custom_parameter_language': language || 'unknown',
+                'value': 35  // Very high value for direct contact
+            });
+        }
+        
+        function trackModalOpen(modalType, language) {
+            gtag('event', 'modal_open', {
+                'event_category': 'engagement',
+                'event_label': modalType,
+                'custom_parameter_language': language || 'unknown',
+                'value': 10
+            });
+        }
+        
+        // Scroll depth tracking
+        function trackScrollDepth(percentage) {
+            gtag('event', 'scroll', {
+                'event_category': 'engagement',
+                'event_label': 'scroll_depth',
+                'value': percentage
+            });
+        }
+        
+        // Automatically track scroll depth
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollPercent = Math.round((scrollTop / docHeight) * 100);
+            
+            // Track at 25%, 50%, 75%, and 100% scroll
+            if (scrollPercent >= 25 && !window.scroll25) {
+                window.scroll25 = true;
+                trackScrollDepth(25);
+            }
+            if (scrollPercent >= 50 && !window.scroll50) {
+                window.scroll50 = true;
+                trackScrollDepth(50);
+            }
+            if (scrollPercent >= 75 && !window.scroll75) {
+                window.scroll75 = true;
+                trackScrollDepth(75);
+            }
+            if (scrollPercent >= 100 && !window.scroll100) {
+                window.scroll100 = true;
+                trackScrollDepth(100);
+            }
+        });
+        
+        // Track time spent on page
+        let startTime = Date.now();
+        let timeTracked = false;
+        
+        window.addEventListener('beforeunload', function() {
+            if (!timeTracked) {
+                let timeSpent = Math.round((Date.now() - startTime) / 1000);
+                gtag('event', 'timing_complete', {
+                    'name': 'page_view_duration',
+                    'value': timeSpent
+                });
+                timeTracked = true;
+            }
+        });
+        
+        // Enhanced error tracking
+        window.addEventListener('error', function(e) {
+            gtag('event', 'exception', {
+                'description': e.error ? e.error.toString() : 'Unknown error',
+                'fatal': false,
+                'error_line': e.lineno || 0,
+                'error_file': e.filename || 'unknown'
+            });
+        });
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revolutionary AI Agents Handle 100% of Your Calls - No More Wait Times | BusyBee</title>
@@ -487,7 +639,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                  <iframe src="https://www.youtube.com/embed/1OvZj3Wbhu4" 
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
+                            allowfullscreen
+                            onload="trackVideoInteraction('video_load', 'BusyBee Korean Demo', 'ko')">
                     </iframe>
                 </div>
                 <p style="margin-top: 20px; font-size: 1.1em; color: #495057;">
@@ -508,7 +661,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="ko-restaurant-btn">레스토랑 예약 시연</a>
                 <a href="tel:+14705547801" class="cta-button" id="ko-hotel-btn">호텔 예약 시연</a>
-                <a href="https://resta.zzzmate.com/vendor/vendor-login.php?lang=ko" class="cta-button" target="_blank">벤더 포털 데모</a>
+                <a href="https://resta.zzzmate.com/vendor/vendor-login.php?lang=ko" class="cta-button" target="_blank" onclick="trackButtonClick('Vendor Portal Demo', 'Demo Section', 'ko')">벤더 포털 데모</a>
                 <a href="#" class="cta-button" id="ko-callcenter-btn">콜센터 예약 시연</a>
             </div>
             
@@ -519,7 +672,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
                     </svg>
                 </div>
-                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="ko-manager-chat-btn">매니저 Lily와 상담하기</a>
+                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="ko-manager-chat-btn" onclick="trackWhatsAppClick('ko')">매니저 Lily와 상담하기</a>
             </div>
 
             <div class="section">
@@ -610,7 +763,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                     <iframe src="https://www.youtube.com/embed/Xk7SXg0BWCU" 
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
+                            allowfullscreen
+                            onload="trackVideoInteraction('video_load', 'BusyBee English Demo', 'en')">
                     </iframe>
                 </div>
                 <p style="margin-top: 20px; font-size: 1.1em; color: #495057;">
@@ -631,7 +785,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             <div class="demo-buttons">
                 <a href="tel:+18043657801" class="cta-button" id="en-restaurant-btn">Try Restaurant Reservation</a>
                 <a href="tel:+14705547801" class="cta-button" id="en-hotel-btn">Try Hotel Reservation</a>
-                <a href="https://resta.zzzmate.com/vendor/vendor-login.php?lang=en" class="cta-button" target="_blank">Try Vendor Portal Demo</a>
+                <a href="https://resta.zzzmate.com/vendor/vendor-login.php?lang=en" class="cta-button" target="_blank" onclick="trackButtonClick('Vendor Portal Demo', 'Demo Section', 'en')">Try Vendor Portal Demo</a>
                 <a href="#" class="cta-button" id="en-callcenter-btn">Try Call Center Services</a>
             </div>
             
@@ -642,7 +796,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                         <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#3498db"/>
                     </svg>
                 </div>
-                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="en-manager-chat-btn">Chat with Manager Lily</a>
+                <a href="https://wa.me/821021883345" target="_blank" class="ai-button" id="en-manager-chat-btn" onclick="trackWhatsAppClick('en')">Chat with Manager Lily</a>
             </div>
 
             <div class="section">
@@ -723,7 +877,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h3 class="modal-title">무료 상담 예약하기</h3>
-                <form id="ko-meeting-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form id="ko-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
                     <div class="form-group">
                         <label for="ko-name">이름 *</label>
                         <input type="text" id="ko-name" name="name" required>
@@ -764,7 +918,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h3 class="modal-title">Book Free Consultation</h3>
-                <form id="en-meeting-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form id="en-meeting-form" action="https://formspree.io/f/myzelpvb" method="POST">
                     <div class="form-group">
                         <label for="en-name">Name *</label>
                         <input type="text" id="en-name" name="name" required>
@@ -805,7 +959,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
     <footer>
         <p>&copy; 2025 BusyBee AI Technologies. All rights reserved.</p>
         <div style="text-align: center; margin-top: 20px;">
-            <p>📞 Contact: <a href="https://wa.me/821021883345" style="color: #f39c12;">WhatsApp +82-10-2188-3345</a></p>
+            <p>📞 Contact: <a href="https://wa.me/821021883345" style="color: #f39c12;" onclick="trackWhatsAppClick('footer')">WhatsApp +82-10-2188-3345</a></p>
         </div>
     </footer>
 
@@ -813,12 +967,17 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
         // 전역 변수 및 함수 정의
         let currentLanguage = 'ko';
         
-        // 언어 전환 함수
+        // 언어 전환 함수 (Google Analytics 추가)
         function switchLanguage(lang) {
             const koContent = document.getElementById('ko-content');
             const enContent = document.getElementById('en-content');
             const krFlag = document.getElementById('kr-flag');
             const usFlag = document.getElementById('us-flag');
+            
+            // Track language switch
+            if (currentLanguage !== lang) {
+                trackLanguageSwitch(currentLanguage, lang);
+            }
             
             currentLanguage = lang;
             
@@ -837,11 +996,15 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             }
         }
         
-        // 모달 열기 함수
+        // 모달 열기 함수 (Google Analytics 추가)
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.classList.add('active');
+                // Track modal open event
+                const modalType = modalId.includes('ko') ? 'consultation_ko' : 'consultation_en';
+                const language = modalId.includes('ko') ? 'ko' : 'en';
+                trackModalOpen(modalType, language);
             }
         }
         
@@ -853,7 +1016,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             }
         }
         
-        // 콜센터 모달 생성 함수
+        // 콜센터 모달 생성 함수 (Google Analytics 추가)
         function createCallCenterModal(lang) {
             const modal = document.createElement('div');
             modal.className = 'modal active';
@@ -867,6 +1030,9 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             modal.style.justifyContent = 'center';
             modal.style.alignItems = 'center';
             modal.style.zIndex = '1000';
+            
+            // Track call center modal open
+            trackModalOpen('call_center_info', lang);
             
             const modalContent = document.createElement('div');
             modalContent.style.backgroundColor = 'white';
@@ -912,6 +1078,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                 button.textContent = '무료 상담 요청하기';
                 
                 button.addEventListener('click', function() {
+                    trackButtonClick('Request Consultation from Call Center Modal', 'Call Center Modal', 'ko');
                     document.body.removeChild(modal);
                     openModal('ko-meeting-modal');
                 });
@@ -921,6 +1088,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                 button.textContent = 'Request Free Consultation';
                 
                 button.addEventListener('click', function() {
+                    trackButtonClick('Request Consultation from Call Center Modal', 'Call Center Modal', 'en');
                     document.body.removeChild(modal);
                     openModal('en-meeting-modal');
                 });
@@ -986,7 +1154,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                 });
             });
             
-            // CTA 버튼들 이벤트 핸들러
+            // CTA 버튼들 이벤트 핸들러 (Google Analytics 추가)
             const koMainCta = document.getElementById('ko-main-cta-btn');
             const koSecondaryCta = document.getElementById('ko-secondary-cta-btn');
             const enMainCta = document.getElementById('en-main-cta-btn');
@@ -997,6 +1165,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (koMainCta) {
                 koMainCta.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Main CTA Korean', 'Hero Section', 'ko');
                     openModal('ko-meeting-modal');
                 });
             }
@@ -1004,6 +1173,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (koSecondaryCta) {
                 koSecondaryCta.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Secondary CTA Korean', 'Secondary CTA Section', 'ko');
                     openModal('ko-meeting-modal');
                 });
             }
@@ -1011,6 +1181,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (enMainCta) {
                 enMainCta.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Main CTA English', 'Hero Section', 'en');
                     openModal('en-meeting-modal');
                 });
             }
@@ -1018,6 +1189,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (enSecondaryCta) {
                 enSecondaryCta.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Secondary CTA English', 'Secondary CTA Section', 'en');
                     openModal('en-meeting-modal');
                 });
             }
@@ -1025,6 +1197,7 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (koCallCenterBtn) {
                 koCallCenterBtn.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackDemoInteraction('Call Center Demo Korean', 'ko');
                     createCallCenterModal('ko');
                 });
             }
@@ -1032,11 +1205,12 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (enCallCenterBtn) {
                 enCallCenterBtn.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackDemoInteraction('Call Center Demo English', 'en');
                     createCallCenterModal('en');
                 });
             }
             
-            // 레스토랑/호텔 예약 버튼 이벤트 핸들러
+            // 레스토랑/호텔 예약 버튼 이벤트 핸들러 (Google Analytics 추가)
             const koRestaurantBtn = document.getElementById('ko-restaurant-btn');
             const enRestaurantBtn = document.getElementById('en-restaurant-btn');
             const koHotelBtn = document.getElementById('ko-hotel-btn');
@@ -1044,6 +1218,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             
             if (koRestaurantBtn) {
                 koRestaurantBtn.addEventListener('click', function(e) {
+                    trackPhoneClick('+18043657801', 'ko');
+                    trackDemoInteraction('Restaurant Demo Korean', 'ko');
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
                         alert('모바일 기기를 사용하여 전화번호 804-365-7801로 전화해보세요. AI 에이전트가 실제 레스토랑 예약을 받는 것을 경험할 수 있습니다.');
                         e.preventDefault();
@@ -1055,6 +1231,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             
             if (enRestaurantBtn) {
                 enRestaurantBtn.addEventListener('click', function(e) {
+                    trackPhoneClick('+18043657801', 'en');
+                    trackDemoInteraction('Restaurant Demo English', 'en');
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
                         alert('Please use a mobile device to call or dial USA 804-365-7801 to experience our AI agent taking restaurant reservations.');
                         e.preventDefault();
@@ -1066,6 +1244,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             
             if (koHotelBtn) {
                 koHotelBtn.addEventListener('click', function(e) {
+                    trackPhoneClick('+14705547801', 'ko');
+                    trackDemoInteraction('Hotel Demo Korean', 'ko');
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
                         alert('모바일 기기를 사용하여 전화번호 +1-470-554-7801로 전화해보세요. AI 에이전트가 실제 호텔 예약을 받는 것을 경험할 수 있습니다.');
                         e.preventDefault();
@@ -1077,6 +1257,8 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             
             if (enHotelBtn) {
                 enHotelBtn.addEventListener('click', function(e) {
+                    trackPhoneClick('+14705547801', 'en');
+                    trackDemoInteraction('Hotel Demo English', 'en');
                     if(!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
                         alert('Please use a mobile device to call or dial +1-470-554-7801 to experience our AI agent taking hotel reservations.');
                         e.preventDefault();
@@ -1086,13 +1268,14 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                 });
             }
             
-            // Video CTA button handlers
+            // Video CTA button handlers (Google Analytics 추가)
             const videoCta = document.getElementById('video-cta-btn');
             const videoCtaEn = document.getElementById('video-cta-btn-en');
             
             if (videoCta) {
                 videoCta.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Video CTA Korean', 'Video Section', 'ko');
                     openModal('ko-meeting-modal');
                 });
             }
@@ -1100,16 +1283,21 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
             if (videoCtaEn) {
                 videoCtaEn.addEventListener('click', function(e) {
                     e.preventDefault();
+                    trackButtonClick('Video CTA English', 'Video Section', 'en');
                     openModal('en-meeting-modal');
                 });
             }
             
+            // Form submission handlers (Google Analytics 추가)
             const koMeetingForm = document.getElementById('ko-meeting-form');
             if (koMeetingForm) {
                 koMeetingForm.addEventListener('submit', function(e) {
                     document.getElementById('ko-cc-email').value = document.getElementById('ko-email').value;
                     
                     if (this.checkValidity()) {
+                        // Track form submission
+                        trackFormSubmission('Consultation Form Korean', 'ko');
+                        
                         setTimeout(function() {
                             alert('상담 요청이 전송되었습니다. 곧 연락드리겠습니다!');
                         }, 500);
@@ -1123,6 +1311,9 @@ AI 음성 에이전트로 고객 경험을 혁신하세요.</p>
                     document.getElementById('en-cc-email').value = document.getElementById('en-email').value;
                     
                     if (this.checkValidity()) {
+                        // Track form submission
+                        trackFormSubmission('Consultation Form English', 'en');
+                        
                         setTimeout(function() {
                             alert('Consultation request has been sent. We will contact you soon!');
                         }, 500);
