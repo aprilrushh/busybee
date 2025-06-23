@@ -160,7 +160,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stop Losing Customers to Busy Signals - AI Agents Answer Every Call | BusyBee</title>
     <meta name="description" content="Tired of missed calls and angry customers? BusyBee AI agents answer 100% of calls instantly, sound exactly like humans, and cost 80% less than hiring staff. Try free demo now.">
-    <style>
+<style>
+.product-hunt-sticky {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(255, 105, 84, 0.3);
+    padding: 12px;
+    transition: all 0.3s ease;
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+/* Pulse glow animation */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 8px 32px rgba(255, 105, 84, 0.3), 
+                    0 0 0 0px rgba(255, 105, 84, 0.4);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 12px 40px rgba(255, 105, 84, 0.5), 
+                    0 0 0 8px rgba(255, 105, 84, 0.1);
+        transform: scale(1.02);
+    }
+}
+
+/* Enhanced hover effect */
+.product-hunt-sticky:hover {
+    animation: none; /* Stop pulse on hover */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 45px rgba(255, 105, 84, 0.6);
+}
+
+/* Add a subtle border glow */
+.product-hunt-sticky::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6954, #ff4436, #ff6954, #ff4436);
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .product-hunt-sticky {
+        top: 15px;
+        right: 15px;
+        transform: scale(0.85);
+        padding: 10px;
+    }
+    
+    .product-hunt-sticky:hover {
+        transform: translateY(-2px) scale(0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-hunt-sticky {
+        top: 10px;
+        right: 10px;
+        transform: scale(0.75);
+        padding: 8px;
+    }
+    
+    .product-hunt-sticky:hover {
+        transform: translateY(-1px) scale(0.8);
+    }
+}
+
+/* Special launch day enhancement - add this class on launch day */
+.product-hunt-sticky.launch-day {
+    animation: launchPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes launchPulse {
+    0% {
+        box-shadow: 0 8px 32px rgba(255, 105, 84, 0.5), 
+                    0 0 0 0px rgba(255, 105, 84, 0.6);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 16px 48px rgba(255, 105, 84, 0.8), 
+                    0 0 0 12px rgba(255, 105, 84, 0.2);
+        transform: scale(1.05);
+    }
+}
+
+/* Add a "NEW" badge for extra attention */
+.product-hunt-sticky .new-badge {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background: linear-gradient(45deg, #ff6954, #ff4436);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 12px;
+    animation: newBadgePulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 12px rgba(255, 105, 84, 0.5);
+}
+
+@keyframes newBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+</style>
+   
+
+   <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -673,6 +795,126 @@
     </style>
 </head>
 <body>
+<!-- Enhanced Product Hunt Badge HTML - Replace the existing badge -->
+<div class="product-hunt-sticky launch-day" id="product-hunt-badge">
+    <!-- Optional "NEW" badge for extra attention -->
+    <div class="new-badge">NEW!</div>
+    
+    <a href="https://www.producthunt.com/products/busybee-ai-24-7-restaurant-phone-agent?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-busybee&#0045;ai&#0045;24&#0045;7&#0045;restaurant&#0045;phone&#0045;agent" 
+       target="_blank"
+       onclick="trackButtonClick('Product Hunt Badge Click', 'Top Right Badge', currentLanguage)">
+        <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=982356&theme=light&t=1750661433783" 
+             alt="BusyBee AI - 24/7 Restaurant Phone Agent - Replace expensive staff with AI phone agent. | Product Hunt" 
+             style="width: 250px; height: 54px;" 
+             width="250" 
+             height="54" />
+    </a>
+</div>
+
+<!-- Enhanced JavaScript for Product Hunt Badge -->
+<script>
+function addEnhancedCloseButton() {
+    const stickyBadge = document.querySelector('.product-hunt-sticky');
+    if (stickyBadge) {
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, #ff6954, #ff4436);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 105, 84, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10;
+        `;
+        
+        closeBtn.addEventListener('mouseover', function() {
+            closeBtn.style.transform = 'scale(1.1)';
+            closeBtn.style.boxShadow = '0 6px 16px rgba(255, 105, 84, 0.6)';
+        });
+        
+        closeBtn.addEventListener('mouseout', function() {
+            closeBtn.style.transform = 'scale(1)';
+            closeBtn.style.boxShadow = '0 4px 12px rgba(255, 105, 84, 0.4)';
+        });
+        
+        closeBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Track close event
+            trackButtonClick('Product Hunt Badge Close', 'Top Right Badge', currentLanguage);
+            stickyBadge.style.display = 'none';
+        };
+        
+        stickyBadge.appendChild(closeBtn);
+    }
+}
+
+// Enhanced badge management
+function manageLaunchDayBadge() {
+    const badge = document.querySelector('.product-hunt-sticky');
+    if (badge) {
+        // Add launch day class for enhanced animation
+        badge.classList.add('launch-day');
+        
+        // Optional: Remove launch day class after 24 hours
+        setTimeout(() => {
+            badge.classList.remove('launch-day');
+        }, 24 * 60 * 60 * 1000); // 24 hours
+    }
+}
+
+// Run after page loads
+document.addEventListener('DOMContentLoaded', function() {
+    addEnhancedCloseButton();
+    manageLaunchDayBadge();
+    
+    // Track badge visibility
+    const badge = document.querySelector('.product-hunt-sticky');
+    if (badge) {
+        // Track when badge comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gtag('event', 'product_hunt_badge_view', {
+                        'event_category': 'engagement',
+                        'event_label': 'badge_visible',
+                        'custom_parameter_language': currentLanguage
+                    });
+                }
+            });
+        });
+        observer.observe(badge);
+    }
+});
+
+// Optional: Add click tracking to the main badge link
+document.addEventListener('DOMContentLoaded', function() {
+    const badgeLink = document.querySelector('.product-hunt-sticky a');
+    if (badgeLink) {
+        badgeLink.addEventListener('click', function() {
+            // Track Product Hunt badge click
+            gtag('event', 'product_hunt_click', {
+                'event_category': 'external_link',
+                'event_label': 'product_hunt_badge',
+                'custom_parameter_language': currentLanguage,
+                'value': 100 // High value for Product Hunt clicks
+            });
+        });
+    }
+});
+</script>
     <div class="container">
         <header>
             <div class="logo">BusyBee</div>
